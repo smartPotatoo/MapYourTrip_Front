@@ -1,0 +1,23 @@
+.sidebar-container {
+  width: 200px;
+  background-color: #BBDEFB;
+  padding: 20px;
+  height: 100vh;
+  position: fixed; /* 사이드바 고정 */
+  top: 0;
+  left: 0;
+  z-index: 1000; /* 헤더와의 z-index 순서를 고려 */
+}
+
+.logo-text {
+  text-align: center;
+}
+
+.menu-item {
+  margin: 25px 0;
+  padding: 10px;
+  background-color: white;
+  border-radius: 30px;
+  text-align: center;
+  cursor: pointer;
+}
