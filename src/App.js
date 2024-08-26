@@ -7,19 +7,27 @@ import './App.css';
 
 const AppContent = () => {
   const location = useLocation();
-  const isLoginPage = location.pathname === '/user/login'; // 현재 경로가 /user/login 인지 확인
+  const isLoginPage = location.pathname === '/user/login'; 
 
   return (
-    <div>
+    <div id="app-root" style={{
+      display: isLoginPage ? 'block' : 'flex',
+      justifyContent: isLoginPage ? 'center' : 'flex-start',
+      alignItems: isLoginPage ? 'center' : 'flex-start',
+      height: '100vh'
+    }}>
       {!isLoginPage && <Sidebar />}
-      {/* 로그인 페이지가 아닌 경우에만 사이드바를 렌더링 */}
       <div style={{ flexGrow: 1 }}>
         {!isLoginPage && <Header />}
-        {/* 로그인 페이지가 아닌 경우에만 헤더를 렌더링 */}
-        <div style={{ padding: isLoginPage ? '0' : '20px' }}>
+        <div style={{
+          flexGrow: 1,
+          padding: isLoginPage ? '0' : '20px',
+          display: isLoginPage ? 'flex' : 'block',
+          justifyContent: isLoginPage ? 'center' : 'flex-start',
+          alignItems: isLoginPage ? 'center' : 'flex-start',
+        }}>
           <Routes>
             <Route path="/user/login" element={<Login />} />
-            {/* 다른 라우트를 추가하여 여러 페이지를 렌더링 할 수 있음 */}
           </Routes>
         </div>
       </div>
@@ -29,7 +37,6 @@ const AppContent = () => {
 
 const App = () => (
   <Router>
-    {/* Router로 AppContent를 감싸서 useLocation 훅이 정상적으로 동작하도록 설정 */}
     <AppContent />
   </Router>
 );
