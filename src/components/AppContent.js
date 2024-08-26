@@ -3,12 +3,13 @@ import { useLocation, Routes, Route } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import Header from './Header';
 import Login from './Login';
-import Signup from './Signup'; // Signup 컴포넌트를 가져옵니다.
+import Signup from './Signup';
+import MyPage from './MyPage';
 
 const AppContent = () => {
   const location = useLocation();
   const isLoginPage = location.pathname === '/open-api/login';
-  const isSignupPage = location.pathname === '/open-api/join'; // 회원가입 페이지 확인
+  const isSignupPage = location.pathname === '/open-api/join';
   
   const isAuthPage = isLoginPage || isSignupPage; // 인증 관련 페이지인지 확인
 
@@ -20,7 +21,8 @@ const AppContent = () => {
         <div className={`content-container ${isAuthPage ? 'centered' : ''}`}>
           <Routes>
             <Route path="/open-api/login" element={<Login />} />
-            <Route path="/open-api/join" element={<Signup />} /> {/* 회원가입 페이지 추가 */}
+            <Route path="/open-api/join" element={<Signup />} />
+            <Route path="/mypage" element={<MyPage />} />
           </Routes>
         </div>
       </div>
