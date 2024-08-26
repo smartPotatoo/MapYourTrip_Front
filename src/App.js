@@ -5,19 +5,6 @@ import MapComponent from './MapComponent';
 import './App.css'
 import { NavermapsProvider } from 'react-naver-maps';
 
-
-const App = () => {
-  return (
-    <div>
-      <NavermapsProvider ncpClientId='t1th1qwp3v'>
-        <MapComponent />
-      </NavermapsProvider>
-    </div>
-  );
-};
-
-
-/*
 const App = () => {
   return (
     <div>
@@ -35,5 +22,5 @@ const App = () => {
     </div>
   );
 };
-*/
+
 export default App;
