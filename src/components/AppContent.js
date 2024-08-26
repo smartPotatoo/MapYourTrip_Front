@@ -3,6 +3,7 @@ import { useLocation, Routes, Route } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import Header from './Header';
 import Login from './Login';
+import WrappedMap from './Map';
 
 const AppContent = () => {
     const location = useLocation();
@@ -18,9 +19,10 @@ const AppContent = () => {
               <Route path="/user/login" element={<Login />} />
             </Routes>
           </div>
+          {!isLoginPage && <WrappedMap />}
         </div>
       </div>
     );
-  };
+};
   
   export default AppContent;
