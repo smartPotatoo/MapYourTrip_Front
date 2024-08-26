@@ -1,29 +1,30 @@
-body {
+html, body {
     margin: 0;
+    padding: 0;
+    height: 50%;
     font-family: Arial, sans-serif;
     background-color: #BBDEFB;
-    height: 100vh;
     display: flex;
     justify-content: center;
-    align-items: center;
 }
 
 .login-container {
     width: 100%;
-    height: 100vh;
+    height: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #BBDEFB; /* 배경색 */
+    background-color: #BBDEFB; /* This ensures the entire background is the same color */
 }
 
 .login-box {
     background-color: #E3F2FD;
     padding: 40px;
-    border-radius: 10px;
+    margin-top: 20%;
+    border-radius: 30px;
     text-align: center;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    width: 400px; /* 박스 너비 */
+    width: 600px;
 }
 
 .logo {
