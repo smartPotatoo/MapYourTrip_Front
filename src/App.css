@@ -3,10 +3,13 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #F8F8F8; /* 기본 배경색 설정 */
+  background-color: #F8F8F8;
+  width: 100%;
+  height: 100%;
 }
 
 #root {
-  display: flex;
+  /* Centering styles removed */
   min-height: 100vh;
+  width: 100%;
 }
