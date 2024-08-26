@@ -1,5 +1,6 @@
 .signup-page {
     display: flex;
+    flex-direction: column; /* 요소들을 수직으로 정렬 */
     justify-content: center;
     align-items: center;
     height: 100vh; 
@@ -22,6 +23,7 @@
     font-weight: 1000;
     margin-bottom: 30px;
     color: #000;
+    text-align: center;
 }
 
 .input-group {
@@ -43,9 +45,10 @@
     border-bottom: 1px solid #ccc; /* 하단에만 라인 추가 */
     background-color: transparent; /* 배경색 투명 */
     outline: none; /* 포커스 시 나타나는 기본 outline 제거 */
-    border-radius: 5px;
+    border-radius: 0; /* 로그인과 일관성 있게 변경 */
     font-size: 16px;
 }
+
 .input-group input:focus {
     border-bottom: 1px solid #000; /* 포커스 시 하단 라인의 두께 및 색상 변경 */
 }
