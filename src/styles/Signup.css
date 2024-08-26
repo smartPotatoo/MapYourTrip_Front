@@ -68,3 +68,19 @@
 .signup-button:hover {
     background-color: #90CAF9;
 }
+
+.error-text {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+    text-align: left; /* 오류 메시지를 왼쪽 정렬 */
+    display: block;
+}
+
+.success-text {
+    color: green;
+    font-size: 12px;
+    margin-top: 5px;
+    text-align: left; /* 성공 메시지를 왼쪽 정렬 */
+    display: block;
+}
