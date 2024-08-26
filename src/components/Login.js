@@ -7,6 +7,7 @@ const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [shake, setShake] = useState(false); // 애니메이션을 위한 상태
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -34,10 +35,12 @@ const Login = () => {
       } else {
         const errorData = await response.json();
         setErrorMessage(errorData.message || '로그인에 실패했습니다.');
+        setShake(true); // 로그인 실패 시 애니메이션 시작
       }
     } catch (error) {
       console.error('로그인 중 오류 발생:', error);
       setErrorMessage('서버와의 연결에 문제가 발생했습니다.');
+      setShake(true); // 로그인 실패 시 애니메이션 시작
     }
     */
 
@@ -45,14 +48,15 @@ const Login = () => {
     if (username && password) {
       navigate('/');
     } else {
-      setErrorMessage('아이디와 비밀번호를 입력해주세요.');
+      setErrorMessage('정확한 아이디와 비밀번호를 입력해주세요.');
+      setShake(true); // 로그인 실패 시 애니메이션 시작
     }
   };
 
   return (
     <div id="login-root" className="login-page">
       <h1 className="logo">MainYourTrip</h1>
-      <div className="login-container">
+      <div className={`login-container ${shake ? 'shake' : ''}`} onAnimationEnd={() => setShake(false)}>
         <div className="input-group">
           <label htmlFor="username">아이디</label>
           <input

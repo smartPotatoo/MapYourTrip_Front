@@ -76,3 +76,22 @@
 .signup-link a:hover {
     text-decoration: underline;
 }
+
+.error-text {
+    color: red;
+    font-size: 12px;
+    margin-bottom: 15px;
+    display: block;
+}
+
+/* 추가된 애니메이션 */
+.shake {
+    animation: shake 0.3s ease-in-out;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+}
