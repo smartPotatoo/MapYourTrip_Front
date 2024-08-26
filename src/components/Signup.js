@@ -4,7 +4,7 @@ import '../styles/Signup.css';
 const Signup = () => {
   return (
     <div id="signup-root" className="signup-page">
-      <h1 className="logo">Sign Up for MapYourTrip</h1>
+      <h1 className="logo">MapYourTrip</h1>
       <div className="signup-container">
         <div className="input-group">
           <label htmlFor="username">아이디</label>
