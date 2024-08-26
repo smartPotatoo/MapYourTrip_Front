@@ -27,7 +27,7 @@ const Login = () => {
         </div>
         <button type="submit" className="login-button" onClick={handleLogin}>로그인</button>
         <div className="signup-link">
-          <a href="/signup">회원가입</a>
+          <a href="/open-api/join">회원가입</a>
         </div>
       </div>
     </div>
