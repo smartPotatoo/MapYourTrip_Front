@@ -1,5 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import ScheduleTimeItem from './ScheduleTimeItem'
+
 import '../styles/ScheduleDateItem.css';
 
 const ScheduleDateItem = (props) => {
@@ -11,7 +12,10 @@ const ScheduleDateItem = (props) => {
         </div>
         <div className='detail-schedule-container'>
           <div className='time-memo-list-container'>
+            <ScheduleTimeItem/>
+            <ScheduleTimeItem/>
 
+            <p></p>
           </div>
           <div className='schedule-add-container'>
             <input className='detail-add-button' type='button' value={"장소 추가"}/>
