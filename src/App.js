@@ -7,7 +7,7 @@ import './App.css';
 
 const AppContent = () => {
   const location = useLocation();
-  const isLoginPage = location.pathname === '/login'; // 현재 경로가 /login 인지 확인
+  const isLoginPage = location.pathname === '/user/login'; // 현재 경로가 /user/login 인지 확인
 
   return (
     <div>
@@ -18,7 +18,7 @@ const AppContent = () => {
         {/* 로그인 페이지가 아닌 경우에만 헤더를 렌더링 */}
         <div style={{ padding: isLoginPage ? '0' : '20px' }}>
           <Routes>
-            <Route path="/login" element={<Login />} />
+            <Route path="/user/login" element={<Login />} />
             {/* 다른 라우트를 추가하여 여러 페이지를 렌더링 할 수 있음 */}
           </Routes>
         </div>
