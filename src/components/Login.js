@@ -13,10 +13,10 @@ const Login = () => {
     e.preventDefault();
 
     // 로그인 요청을 위한 데이터
-    const loginData = {
-      username: username,
-      password: password,
-    };
+    // const loginData = {
+    //   username: username,
+    //   password: password,
+    // };
 
     // 서버에 로그인 요청 (주석 처리된 부분)
     /*
