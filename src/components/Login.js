@@ -4,8 +4,8 @@ import '../styles/Login.css';
 function Login() {
     return (
         <div className="login-container">
+            <h1 className="logo">MainYourTrip</h1> {/* 로고를 login-box 위에 위치 */}
             <div className="login-box">
-                <h1 className="logo">MainYourTrip</h1>
                 <form>
                     <div className="input-group">
                         <label htmlFor="username">아이디</label>
