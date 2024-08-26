@@ -8,7 +8,7 @@
     height: 40px;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
     position: fixed;
-    left: 240px; /* 사이드바를 고려하여 위치 설정 */
+    left: 290px; /* 사이드바를 고려하여 위치 설정 */
     z-index: 1000;
   }
   
