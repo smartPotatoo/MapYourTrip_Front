@@ -3,6 +3,7 @@ import { useLocation, Routes, Route } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import Header from './Header';
 import Login from './Login';
+import '../styles/AppContent.css';
 
 const AppContent = () => {
     const location = useLocation();

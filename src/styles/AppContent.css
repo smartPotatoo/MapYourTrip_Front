@@ -1,0 +1,28 @@
+#app-root {
+    height: 100vh;
+  }
+  
+  .login-page {
+    display: block;
+  }
+  
+  .default-page {
+    display: flex;
+  }
+  
+  .content-wrapper {
+    flex-grow: 1;
+  }
+  
+  .content-container {
+    flex-grow: 1;
+    padding: 20px;
+  }
+  
+  .content-container.centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+  }
+  
