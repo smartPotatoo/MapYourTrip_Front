@@ -55,12 +55,34 @@ const MyPage = () => {
     fetchMyPageData();
   }, []);
 
+  const handleProfileImageChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setProfile((prevProfile) => ({
+          ...prevProfile,
+          filePath: reader.result,
+        }));
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   return (
     <div className="mypage-container">
       {profile && (
         <div className="profile-section">
-          <img src={profile.filePath} alt="프로필" className="profile-img" />
+          <div className="profile-img-container">
+            <img src={profile.filePath} className="profile-img" />
+          </div>
           <h2>{profile.nickname}</h2>
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleProfileImageChange}
+            className="edit-profile-input"
+          />
           <button className="edit-profile-button">프로필 사진 수정</button>
         </div>
       )}

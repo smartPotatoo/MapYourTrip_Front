@@ -8,13 +8,28 @@
   flex-direction: column;
   align-items: center;
   margin-bottom: 20px;
+  margin-top: 100px;
 }
 
-.profile-img {
+.profile-img-container {
   width: 150px;
   height: 150px;
   border-radius: 50%;
+  background-color: #c2c2c2; /* 검정색 배경 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-bottom: 10px;
+}
+
+.profile-img {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+}
+
+.edit-profile-input {
+  display: none;
 }
 
 .edit-profile-button {
@@ -24,6 +39,10 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
+}
+
+.edit-profile-button:hover + .edit-profile-input {
+  display: block;
 }
 
 .travel-plans-section {
