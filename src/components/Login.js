@@ -21,8 +21,6 @@ const Login = () => {
       username: username,
       password: password,
     };
-
-    // 서버에 로그인 요청 (주석 처리된 부분)
     
     try {
       const response = await fetch(API_URL + '/open-api/login', {
