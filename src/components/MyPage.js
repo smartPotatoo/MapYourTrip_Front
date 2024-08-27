@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import editIcon from '../assets/icon_edit.svg'; // 수정 아이콘
-import profileIcon from '../assets/icon_person.svg'; // 프로필 아이콘
+import profileIcon from '../assets/icon_person.svg'; // 기본 프로필 아이콘
 import '../styles/MyPage.css';
 
 const MyPage = () => {
@@ -34,7 +34,7 @@ const MyPage = () => {
       // Mock 데이터로 대체
       const mockProfile = {
         nickname: '오늘점심은두찜',
-        filePath: '/path/to/profile/image.jpg',
+        filePath: '', // 기본적으로 파일 경로를 비워둠
       };
       
       const mockTravelPlans = [
@@ -76,8 +76,11 @@ const MyPage = () => {
       {profile && (
         <div className="profile-section">
           <div className="profile-img-container">
-            <img src={profileIcon} alt="프로필 아이콘" className="profile-icon" />
-            <img src={profile.filePath} className="profile-img" alt="프로필 이미지" />
+            <img 
+              src={profile.filePath || profileIcon} 
+              className="profile-img" 
+              alt="프로필 이미지" 
+            />
           </div>
           <div className="nickname-container">
             <h2>{profile.nickname}</h2>
