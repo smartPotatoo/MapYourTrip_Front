@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import editIcon from '../assets/icon_edit.svg'; // 수정 아이콘
-import profileIcon from '../assets/icon_person.svg'; // 기본 프로필 아이콘
 import '../styles/MyPage.css';
 
 const MyPage = () => {
@@ -10,7 +9,7 @@ const MyPage = () => {
   useEffect(() => {
     // 서버로부터 마이페이지 데이터 가져오기
     const fetchMyPageData = async () => {
-      // 서버 연결 부분
+      // 서버 연결 부분 (주석 처리)
       /*
       try {
         const response = await fetch('/mypage', {
@@ -77,9 +76,8 @@ const MyPage = () => {
         <div className="profile-section">
           <div className="profile-img-container">
             <img 
-              src={profile.filePath || profileIcon} 
+              src={profile.filePath || ''} 
               className="profile-img" 
-              alt="프로필 이미지" 
             />
           </div>
           <div className="nickname-container">
@@ -92,7 +90,12 @@ const MyPage = () => {
             onChange={handleProfileImageChange}
             className="edit-profile-input"
           />
-          <button className="edit-profile-button">프로필 사진 수정</button>
+          <button 
+            className="edit-profile-button"
+            onClick={() => document.querySelector('.edit-profile-input').click()}
+          >
+            프로필 사진 수정
+          </button>
         </div>
       )}
 
