@@ -6,7 +6,6 @@ import Login from './Login';
 import Signup from './Signup';
 import MyPage from './MyPage';
 import WrappedMap from './Map';
-import ScheduleList from './ScheduleList';
 
 
 const AppContent = () => {
@@ -26,7 +25,6 @@ const AppContent = () => {
           <Routes>
             <Route path="/open-api/login" element={<Login />} />
             <Route path="/open-api/join" element={<Signup />} />
-            <Route path="/" element={<ScheduleList />} />
             <Route path="/mypage" element={<MyPage />} />
             <Route path="/schedule/:type/:id" element={<WrappedMap/>}/> {/* type: {create: 일정 생성 페이지, modify: 일정 수정 페이지}, id: 일정 식별키*/}
           </Routes>
