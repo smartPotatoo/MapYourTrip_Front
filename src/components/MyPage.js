@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import editIcon from '../assets/icon_edit.svg';
+import { FaSave } from 'react-icons/fa'; // 저장 아이콘
+import editIcon from '../assets/icon_edit.svg'; // 수정 아이콘
 import TravelPlansList from './TravelPlansList';
 import '../styles/MyPage.css';
 
 const MyPage = () => {
   const [profile, setProfile] = useState(null);
   const [travelPlans, setTravelPlans] = useState([]);
+  const [isEditingNickname, setIsEditingNickname] = useState(false);
+  const [newNickname, setNewNickname] = useState('');
 
   useEffect(() => {
     const fetchMyPageData = async () => {
-      // 서버 연결 부분
+      // 서버 연결 부분 (주석 처리됨)
       /*
       try {
         const response = await fetch('/mypage', {
@@ -70,6 +73,19 @@ const MyPage = () => {
     }
   };
 
+  const handleEditNickname = () => {
+    setIsEditingNickname(true);
+    setNewNickname(profile.nickname);
+  };
+
+  const handleSaveNickname = () => {
+    setProfile((prevProfile) => ({
+      ...prevProfile,
+      nickname: newNickname,
+    }));
+    setIsEditingNickname(false);
+  };
+
   const handleDeletePlan = (index) => {
     setTravelPlans((prevPlans) => prevPlans.filter((_, i) => i !== index));
   };
@@ -77,26 +93,47 @@ const MyPage = () => {
   return (
     <div className="mypage-container">
       {profile && (
-        <div className="profile-section">
-          <div className="profile-img-container">
+        <div className="mypage-profile-section">
+          <div className="mypage-profile-img-container">
             <img 
               src={profile.filePath || ''} 
-              className="profile-img" 
+              className="mypage-profile-img" 
             />
           </div>
-          <div className="nickname-container">
-            <h2>{profile.nickname}</h2>
-            <img src={editIcon} className="edit-nickname-icon" />
+          <div className="mypage-nickname-container">
+            {isEditingNickname ? (
+              <>
+                <input 
+                  type="text"
+                  value={newNickname}
+                  onChange={(e) => setNewNickname(e.target.value)}
+                  className="mypage-edit-nickname-input"
+                />
+                <FaSave 
+                  className="mypage-save-nickname-icon"
+                  onClick={handleSaveNickname}
+                />
+              </>
+            ) : (
+              <>
+                <h2 className="mypage-nickname">{profile.nickname}</h2>
+                <img 
+                  src={editIcon} 
+                  className="mypage-edit-nickname-icon" 
+                  onClick={handleEditNickname}
+                />
+              </>
+            )}
           </div>
           <input
             type="file"
             accept="image/*"
             onChange={handleProfileImageChange}
-            className="edit-profile-input"
+            className="mypage-edit-profile-input"
           />
           <button 
-            className="edit-profile-button"
-            onClick={() => document.querySelector('.edit-profile-input').click()}
+            className="mypage-edit-profile-button"
+            onClick={() => document.querySelector('.mypage-edit-profile-input').click()}
           >
             프로필 사진 수정
           </button>
