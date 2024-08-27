@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import editIcon from '../assets/icon_edit.svg'; // 수정 아이콘
+import editIcon from '../assets/icon_edit.svg';
+import TravelPlansList from './TravelPlansList';
 import '../styles/MyPage.css';
 
 const MyPage = () => {
@@ -7,9 +8,8 @@ const MyPage = () => {
   const [travelPlans, setTravelPlans] = useState([]);
 
   useEffect(() => {
-    // 서버로부터 마이페이지 데이터 가져오기
     const fetchMyPageData = async () => {
-      // 서버 연결 부분 (주석 처리)
+      // 서버 연결 부분
       /*
       try {
         const response = await fetch('/mypage', {
@@ -70,6 +70,10 @@ const MyPage = () => {
     }
   };
 
+  const handleDeletePlan = (index) => {
+    setTravelPlans((prevPlans) => prevPlans.filter((_, i) => i !== index));
+  };
+
   return (
     <div className="mypage-container">
       {profile && (
@@ -82,7 +86,7 @@ const MyPage = () => {
           </div>
           <div className="nickname-container">
             <h2>{profile.nickname}</h2>
-            <img src={editIcon} alt="닉네임 수정 아이콘" className="edit-nickname-icon" />
+            <img src={editIcon} className="edit-nickname-icon" />
           </div>
           <input
             type="file"
@@ -99,21 +103,10 @@ const MyPage = () => {
         </div>
       )}
 
-      <div className="travel-plans-section">
-        <h3>My Travel Plans</h3>
-        <div className="travel-plans-list">
-          {travelPlans.map((plan, index) => (
-            <div key={index} className="travel-plan-card">
-              <div className="travel-plan-header">
-                <h4>{plan.tripName}</h4>
-                <img src={editIcon} alt="일정 수정 아이콘" className="edit-plan-icon" />
-              </div>
-              <p>{plan.startDate} ~ {plan.endDate}</p>
-              <button className="delete-plan-button">삭제</button>
-            </div>
-          ))}
-        </div>
-      </div>
+      <TravelPlansList
+        travelPlans={travelPlans}
+        onDeletePlan={handleDeletePlan}
+      />
     </div>
   );
 };
