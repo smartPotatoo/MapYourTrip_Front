@@ -1,9 +1,22 @@
 import React from 'react';
 import { Container as MapDiv, NaverMap, Marker, useNavermaps } from 'react-naver-maps';
 import { NavermapsProvider } from 'react-naver-maps';
+import {useParams} from "react-router"
+import { useEffect, useState ,useContext} from 'react';
+import MapYourTripContext from '../provider/MapYourTripContext';
 
 const Map = () => {
   const navermaps = useNavermaps();
+
+  const {handleSetType, handleSetScheduleId} = useContext(MapYourTripContext);
+
+  //path variable value
+  const {type, id} = useParams();
+
+  useEffect(()=>{
+    handleSetType(type);
+    handleSetScheduleId(id);
+  },[])
 
   return (
     <NaverMap

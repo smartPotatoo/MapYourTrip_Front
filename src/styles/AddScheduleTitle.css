@@ -1,0 +1,42 @@
+.add-schedule-title-container{
+  display: flex;
+  width: 80vw;
+  justify-content: space-between;
+}
+.add-schedule-title-input-container{
+  display: flex;
+  align-items: center;
+}
+.add-schedule-title-input{
+  width: 800px;
+  padding: 9px 20px 9px 20px;
+  font-size: 1.1rem;
+  border-radius: 15px;
+  border: 1px solid #ccc;
+  background-color: #f7f7f7;
+}
+.add-schedule-title-input-container label{
+  font-size: 1.1rem;
+  margin-right: 30px;
+  margin-left: 10px;
+}
+.add-schedule-title-button-container{
+
+}
+.add-schedule-title-button{
+  all: unset;
+  border: 1px solid #333;
+  text-align: center;
+  width: 150px;
+  height: 38px;
+  border-radius: 15px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  background-color: #0d47a1;
+  color: white;
+}
+
+.add-schedule-title-button:active{
+  opacity: .7;
+}

@@ -26,9 +26,9 @@ const AppContent = () => {
             <Route path="/open-api/login" element={<Login />} />
             <Route path="/open-api/join" element={<Signup />} />
             <Route path="/mypage" element={<MyPage />} />
+            <Route path="/schedule/:type/:id" element={<WrappedMap/>}/> {/* type: {create: 일정 생성 페이지, modify: 일정 수정 페이지}, id: 일정 식별키*/}
           </Routes>
           </div>
-          {!isAuthPage && !isMyPage && <WrappedMap />}  {/* WrappedMap 컴포넌트를 로그인와 마이페이지 페이지가 아닌 경우에만 렌더링 */}
         </div>
       </div>
     );
