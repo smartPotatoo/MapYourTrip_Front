@@ -3,6 +3,7 @@ import MapYourTripContext from "./MapYourTripContext.js";
 const MapYourTripProvider = (props) =>{
   const [type,setType] = useState('');
   const [scheduleId,setScheduleId] = useState('');
+  const [token, setToken] = useState('');
 
   const handleSetType = (item) =>{
     setType(item);
@@ -12,9 +13,13 @@ const MapYourTripProvider = (props) =>{
     setScheduleId(item);
   }
 
+  const handleSetToken = (item) =>{
+    setToken(item);
+  }
+
 
   return (
-    <MapYourTripContext.Provider value={{handleSetType, handleSetScheduleId, type, scheduleId}}>
+    <MapYourTripContext.Provider value={{handleSetType, handleSetScheduleId, handleSetToken, type, scheduleId, token}}>
         {props.children}
     </MapYourTripContext.Provider>
   );
