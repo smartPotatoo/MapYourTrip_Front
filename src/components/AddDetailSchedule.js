@@ -1,6 +1,5 @@
-import { useEffect } from "react";
+
 import '../styles/AddDetailSchedule.css'
-import { HiMiniXMark } from "react-icons/hi2";
 import { IoIosSearch } from "react-icons/io";
 const AddDetailSchedule = (props) => {
 
@@ -25,7 +24,7 @@ const AddDetailSchedule = (props) => {
           </div>
         </div>
         <div className="add-detail-schedule-button-container">
-          <input className="add-detail-schedule-button add-detail-schedule-enter" type="button" value="장소 추가" onClick={()=>props.click()}/>
+          <input className="add-detail-schedule-button" type="button" value="장소 추가" onClick={()=>props.click()}/>
         </div>
       </div>
           
