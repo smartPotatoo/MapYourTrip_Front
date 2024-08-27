@@ -12,6 +12,7 @@ const AppContent = () => {
   const location = useLocation();
   const isLoginPage = location.pathname === '/open-api/login';
   const isSignupPage = location.pathname === '/open-api/join';
+  const isMyPage = location.pathname === '/mypage';
   
   const isAuthPage = isLoginPage || isSignupPage; // 인증 관련 페이지인지 확인
 
@@ -27,7 +28,7 @@ const AppContent = () => {
             <Route path="/mypage" element={<MyPage />} />
           </Routes>
           </div>
-          {!isAuthPage && <WrappedMap />}  {/* WrappedMap 컴포넌트를 로그인 페이지가 아닌 경우에만 렌더링 */}
+          {!isAuthPage && !isMyPage && <WrappedMap />}  {/* WrappedMap 컴포넌트를 로그인와 마이페이지 페이지가 아닌 경우에만 렌더링 */}
         </div>
       </div>
     );
