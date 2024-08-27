@@ -36,7 +36,7 @@ const Login = () => {
       if (response.ok) {
         const result = await response.json();
         handleSetToken(result.body.token);
-        // navigate('/'); // 메인 페이지로 이동
+        navigate('/'); // 메인 페이지로 이동
       } else {
         const errorData = await response.json();
         setErrorMessage(errorData.message || '로그인에 실패했습니다.');
