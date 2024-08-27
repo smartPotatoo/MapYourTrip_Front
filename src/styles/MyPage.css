@@ -1,0 +1,89 @@
+.mypage-container {
+  padding: 20px;
+  margin-left: 250px; /* 사이드바 너비만큼 왼쪽 여백 추가 */
+}
+
+.mypage-profile-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+  margin-top: 100px;
+}
+
+.mypage-profile-img-container {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%; /* 원형으로 만들기 */
+  background-color: #c3c3c3; /* 배경색 설정 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px; /* 원래 간격으로 돌려놓음 */
+  position: relative;
+  overflow: hidden; /* 이미지가 컨테이너를 넘지 않도록 설정 */
+}
+
+.mypage-profile-img {
+  width: 100%; /* 컨테이너를 꽉 채우도록 설정 */
+  height: 100%; /* 컨테이너를 꽉 채우도록 설정 */
+  object-fit: cover; /* 이미지가 컨테이너를 꽉 채우도록 설정 */
+  border-radius: 50%; /* 이미지도 원형으로 만들기 */
+  display: block;
+}
+
+.mypage-edit-profile-input {
+  display: none;
+}
+
+.mypage-edit-profile-button {
+  background-color: #0D47A1;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 20px; /* 프로필 이미지와의 간격 조정 */
+}
+
+.mypage-nickname-container {
+  display: flex;
+  align-items: center;
+  margin-top: 20px; /* 닉네임과 프로필 이미지 사이의 마진 추가 */
+}
+
+.mypage-nickname {
+  margin: 0;
+}
+
+.mypage-container .mypage-profile-section .mypage-nickname-container .mypage-edit-nickname-input {
+  font-size: 24px;
+  padding: 10;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  color: #000;
+  width: auto;
+  text-align: center;
+  border-bottom: 1px solid #c3c3c3; /* 밑줄 스타일 적용 */
+  margin-right: 10px; /* 아이콘과의 간격 조정 */
+}
+
+.mypage-container .mypage-profile-section .mypage-nickname-container .mypage-save-nickname-icon {
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  color: #808080; /* 기본 회색 */
+  transition: color 0.3s; /* 색상 변경 시 애니메이션 추가 */
+}
+
+.mypage-container .mypage-profile-section .mypage-nickname-container .mypage-save-nickname-icon:hover {
+  color: #000; /* 커서를 올리면 검정색으로 변경 */
+}
+
+.mypage-container .mypage-profile-section .mypage-nickname-container .mypage-edit-nickname-icon {
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+}

@@ -1,6 +1,6 @@
 import React from 'react';
 import '../styles/Header.css';
-import searchIcon from '../assets/Search.svg'; // 이미지 경로를 올바르게 설정
+import searchIcon from '../assets/Search.svg';
 
 const Header = () => {
   return (

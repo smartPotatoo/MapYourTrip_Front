@@ -11,6 +11,7 @@ const Sidebar = () => {
       <div><Link to="/open-api/login" className="menu-item">Login</Link></div>
       <div className="menu-item">Travel Plans</div>
       <div className="menu-item">Map</div>
+      <div><Link to="/mypage" className="menu-item">Profile</Link></div>
       {/* <DetailScheduleList/> */}
     </div>
   );
