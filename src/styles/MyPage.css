@@ -15,17 +15,25 @@
   width: 150px;
   height: 150px;
   border-radius: 50%;
-  background-color: #c2c2c2; /* 검정색 배경 */
+  background-color: #c3c3c3; /* 배경색 변경 */
   display: flex;
   justify-content: center;
   align-items: center;
   margin-bottom: 10px;
+  position: relative;
+}
+
+.profile-icon {
+  position: absolute;
+  width: 80px;
+  height: 80px;
 }
 
 .profile-img {
   width: 140px;
   height: 140px;
   border-radius: 50%;
+  position: absolute;
 }
 
 .edit-profile-input {

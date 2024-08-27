@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import searchIcon from '../assets/icon_person.svg';
 import '../styles/MyPage.css';
 
 const MyPage = () => {
@@ -74,6 +75,7 @@ const MyPage = () => {
       {profile && (
         <div className="profile-section">
           <div className="profile-img-container">
+            <img src={searchIcon} className="profile-icon" />
             <img src={profile.filePath} className="profile-img" />
           </div>
           <h2>{profile.nickname}</h2>
