@@ -5,6 +5,8 @@ import Header from './Header';
 import Login from './Login';
 import Signup from './Signup';
 import MyPage from './MyPage';
+import WrappedMap from './Map';
+
 
 const AppContent = () => {
   const location = useLocation();
@@ -24,10 +26,11 @@ const AppContent = () => {
             <Route path="/open-api/join" element={<Signup />} />
             <Route path="/mypage" element={<MyPage />} />
           </Routes>
+          </div>
+          {!isAuthPage && <WrappedMap />}  {/* WrappedMap 컴포넌트를 로그인 페이지가 아닌 경우에만 렌더링 */}
         </div>
       </div>
-    </div>
-  );
+    );
 };
-
-export default AppContent;
+  
+  export default AppContent;
