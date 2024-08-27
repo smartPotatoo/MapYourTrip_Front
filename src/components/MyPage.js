@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import searchIcon from '../assets/icon_person.svg';
+import editIcon from '../assets/icon_edit.svg'; // 수정 아이콘
+import profileIcon from '../assets/icon_person.svg'; // 프로필 아이콘
 import '../styles/MyPage.css';
 
 const MyPage = () => {
@@ -75,10 +76,13 @@ const MyPage = () => {
       {profile && (
         <div className="profile-section">
           <div className="profile-img-container">
-            <img src={searchIcon} className="profile-icon" />
-            <img src={profile.filePath} className="profile-img" />
+            <img src={profileIcon} alt="프로필 아이콘" className="profile-icon" />
+            <img src={profile.filePath} className="profile-img" alt="프로필 이미지" />
           </div>
-          <h2>{profile.nickname}</h2>
+          <div className="nickname-container">
+            <h2>{profile.nickname}</h2>
+            <img src={editIcon} alt="닉네임 수정 아이콘" className="edit-nickname-icon" />
+          </div>
           <input
             type="file"
             accept="image/*"
@@ -94,7 +98,10 @@ const MyPage = () => {
         <div className="travel-plans-list">
           {travelPlans.map((plan, index) => (
             <div key={index} className="travel-plan-card">
-              <h4>{plan.tripName}</h4>
+              <div className="travel-plan-header">
+                <h4>{plan.tripName}</h4>
+                <img src={editIcon} alt="일정 수정 아이콘" className="edit-plan-icon" />
+              </div>
               <p>{plan.startDate} ~ {plan.endDate}</p>
               <button className="delete-plan-button">삭제</button>
             </div>
