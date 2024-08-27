@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/Sidebar.css';
+import DetailScheduleList from'./DetailScheduleList'
 
 const Sidebar = () => {
   return (
@@ -11,6 +12,7 @@ const Sidebar = () => {
       <div className="menu-item">Travel Plans</div>
       <div className="menu-item">Map</div>
       <div><Link to="/mypage" className="menu-item">Profile</Link></div>
+      {/* <DetailScheduleList/> */}
     </div>
   );
 };
