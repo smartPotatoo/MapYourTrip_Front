@@ -22,8 +22,8 @@ const AddScheduleTitle = (props) => {
     axios.post(`http://localhost:8081/schedule/${scheduleId}/detail`,{
       schedulesDateList:dateList
     },{
-      "headers": {
-        "Authorization": `Bearer eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiMiIsInN1YiI6IjIiLCJqdGkiOiIyIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTcyNDgzMjQ5NiwiZXhwIjoxNzI0OTE4ODk2fQ._smY2Yn8oNCPKfH7V6bxT-Lc_P69tvjti1rqQ7ISc08`
+      headers: {
+        Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiMSIsInN1YiI6IjEiLCJqdGkiOiIxIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTcyNDgzNzY0MCwiZXhwIjoxNzI0OTI0MDQwfQ.L0e1FsrZX-q3WhXcMXUB4mxUPOYVLhHqRPUL2rbJNgQ`
     }
     })
     .then(res=>{
@@ -38,8 +38,8 @@ const AddScheduleTitle = (props) => {
     axios.put(`http://localhost:8081/schedule/${scheduleId}/detail`,{
       schedulesDateList:dateList
     },{
-      "headers": {
-        "Authorization": `Bearer eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiMiIsInN1YiI6IjIiLCJqdGkiOiIyIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTcyNDgzMjQ5NiwiZXhwIjoxNzI0OTE4ODk2fQ._smY2Yn8oNCPKfH7V6bxT-Lc_P69tvjti1rqQ7ISc08`
+      headers: {
+        Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiMSIsInN1YiI6IjEiLCJqdGkiOiIxIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTcyNDgzNzY0MCwiZXhwIjoxNzI0OTI0MDQwfQ.L0e1FsrZX-q3WhXcMXUB4mxUPOYVLhHqRPUL2rbJNgQ`
       }
     })
     .then(res=>{
