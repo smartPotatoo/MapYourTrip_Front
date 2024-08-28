@@ -23,10 +23,8 @@ const DetailScheduleList = () => {
   useEffect(()=>{
     let startDate = detailScheduleInfo.startDate;
     let endDate = detailScheduleInfo.endDate
-    console.log(detailScheduleInfo)
 
     if(detailScheduleInfo.length !== 0 && type === 'create'){
-      console.log("adf")
       //시작날짜와 종료날짜에 따른 일일 날짜 리스트 생성
       const start = new Date(`20${startDate.slice(0, 2)}-${startDate.slice(2, 4)}-${startDate.slice(4, 6)}`);
       const end = new Date(`20${endDate.slice(0, 2)}-${endDate.slice(2, 4)}-${endDate.slice(4, 6)}`);
@@ -45,16 +43,23 @@ const DetailScheduleList = () => {
           currentDate.setDate(currentDate.getDate() + 1);
       }
       handleSetDateList(dates);
-      console.log(dates)
     }
     
   },[detailScheduleInfo])
 
   useEffect(()=>{
-    if(scheduleTimeInfo.lenth !== 0){
+    console.log(dateList)
+    if(scheduleTimeInfo.length !== 0){
       dateList.forEach((item)=>{
         if(item.date === date){
           item.times.push(scheduleTimeInfo)
+
+          item.times.sort((a, b) => {
+            const timeA = a.startTime.split(':').map(Number);
+            const timeB = b.startTime.split(':').map(Number);
+  
+            return timeA[0] - timeB[0] || timeA[1] - timeB[1];
+          });
         }
       })
       handleSetDateList([...dateList])

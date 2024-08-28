@@ -4,6 +4,7 @@ import { IoIosSearch } from "react-icons/io";
 import axios from 'axios';
 import { useEffect, useState, useContext } from 'react';
 import MapYourTripContext from '../provider/MapYourTripContext';
+import { useDaumPostcodePopup } from "react-daum-postcode";
 const AddDetailSchedule = (props) => {
   const [addressInfo, setAddressInfo] = useState({
     startTime:'',
@@ -15,19 +16,25 @@ const AddDetailSchedule = (props) => {
   });
 
   const {handleSetScheduleTimeInfo} = useContext(MapYourTripContext);
-
   const [address,setAddress] = useState('');
+  const open = useDaumPostcodePopup("https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js");
   
-  const search = () =>{
-    axios.get((`/map-geocode/v2/geocode?query=${address}`),{
+  const selectAddress = (e) => {
+    open({ onComplete: handleComplete });
+  }
+
+  const handleComplete = (data) =>{
+    console.log(data)
+    axios.get((`/map-geocode/v2/geocode?query=${data.address}`),{
       headers:{
         "X-NCP-APIGW-API-KEY-ID":process.env.REACT_APP_NAVER_MAP_CLIENT_ID,
         "X-NCP-APIGW-API-KEY":process.env.REACT_APP_NAVER_MAP_API_KEY
       }
     }).then(res=>{
+      console.log(res)
       setAddressInfo({ ...addressInfo,
-        name: res.data.addresses[0].jibunAddress, 
-        address: res.data.addresses[0].roadAddress,
+        name: data.buildingName !== '' ? data.buildingName : data.address, 
+        address: data.address,
         x: res.data.addresses[0].x,
         y: res.data.addresses[0].y
       })
@@ -53,15 +60,15 @@ const AddDetailSchedule = (props) => {
   const handleSetEndTime=(e)=>{
     setAddressInfo({...addressInfo,endTime : e.target.value})
   }
-
+console.log(addressInfo)
   return(
     <>
       <div className="add-detail-schedule-container">
         <div className="add-detail-schedule-content-container">
           <div className="content-container">
             <label htmlFor='palce-name' className="content-name">여행 장소</label>
-            <input type="text" name='palce-name' className='palce-name' onChange={handleSetAddress}/>
-            <IoIosSearch size={25} className="searchIcon" onClick={()=>search()}/>
+            <input type="text" name='palce-name' className='palce-name' readOnly value={addressInfo.name}/>
+            <IoIosSearch size={25} className="searchIcon" onClick={()=>selectAddress()}/>
           </div>
           <div className="content-container">
             <label htmlFor="start-time" className="content-name">시작 시간</label>
