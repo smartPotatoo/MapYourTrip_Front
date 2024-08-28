@@ -1,23 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import ScheduleTimeItem from './ScheduleTimeItem'
 import Add from './Add';
-
 import '../styles/ScheduleDateItem.css';
+import MapYourTripContext from '../provider/MapYourTripContext';
 
 const ScheduleDateItem = (props) => {
   const [addScheduleStart,setAddScheduleStart] = useState(false);
   const [addMemoStart, setAddMemoStart] = useState(false);
-
-
+  const {handleSetDate,setScheduleTimeInfo} = useContext(MapYourTripContext);
+  const [times ,setTimes] = useState([]);
   //schedule 추가 창
   const handleAddDetailSchedule = () =>{
+    handleSetDate(props.item.date)
     setAddScheduleStart(true)
   }
 
   //memo 추가 창
   const handleAddMemo = () =>{
+    handleSetDate(props.item.date)
     setAddMemoStart(true)
   }
+  
+  useEffect(()=>{
+    setTimes([...props.item.times]);
+  },[props.item])
+
 
   return (
     <div className="schedule-date-item-container">
@@ -25,11 +32,15 @@ const ScheduleDateItem = (props) => {
       {addMemoStart ? <Add btn={true} onOff={setAddMemoStart} content={"memo"} /> : null}
       <div className='detail-date-container'>
         <div className='date-container'>
-          <p>D{props.index} - {props.item.date}</p>
+          <p>D{props.index+1} - {props.item.date}</p>
         </div>
         <div className='detail-schedule-container'>
           <div className='time-memo-list-container'>
-            <ScheduleTimeItem/>
+            {
+              times.map((item,index)=>(
+                <ScheduleTimeItem key={index} item={item}/>
+              ))
+            }
 
 
             <p></p>

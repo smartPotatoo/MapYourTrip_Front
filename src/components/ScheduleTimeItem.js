@@ -1,16 +1,26 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from "react";
 import '../styles/ScheduleTimeItem.css';
 
 const ScheduleTimeItem = (props) => {
+  const [timeInfo,setTimeInfo] = useState({});
+  useEffect(() => {
+    if (props.item) {
+      setTimeInfo(props.item);
+    }
+  }, [props.item]);
+
+  useEffect(() => {
+  }, [timeInfo]);
+
   return (
     <div className="schedule-time-item-container">
       <div className='palce-name-conatiner'>
-        <p>잠실 롯데타워</p>
+        <p>{props.item.name}</p>
       </div>
       <div className='time-container'>
-        <p>10 : 30</p>
-        <p>10 : 40</p>
+        <p>{props.item.startTime}</p>
+        <p>{props.item.endTime}</p>
       </div>
     </div>
   );
