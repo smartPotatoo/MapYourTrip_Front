@@ -14,6 +14,13 @@ const MapYourTripProvider = (props) =>{
   //시간별 일정 리스트
   const [dateList,setDateList] = useState([]);
 
+  //메모 정보
+  const [scheduleMemoinfo, setScheduleMemoinfo] = useState([]);
+
+  const handleSetScheduleMemoinfo = (item) =>{
+    setScheduleMemoinfo(item);
+  }
+
   const handleSetDateList = (item) =>{
     setDateList(item);
   }
@@ -48,7 +55,7 @@ const MapYourTripProvider = (props) =>{
 
 
   return (
-    <MapYourTripContext.Provider value={{handleSetType,handleSetDateList, handleSetScheduleId,handleSetScheduleTimeInfo, handleSetDetailScheduleInfo,handleSetDetailScheduleDates, handleSetDate, handleSetToken, type, scheduleId, detailScheduleInfo,scheduleTimeInfo, date,dateList, token}}>
+    <MapYourTripContext.Provider value={{handleSetType,handleSetScheduleMemoinfo,handleSetDateList, handleSetScheduleId,handleSetScheduleTimeInfo, handleSetDetailScheduleInfo,handleSetDetailScheduleDates, handleSetDate, handleSetToken, scheduleMemoinfo,type, scheduleId, detailScheduleInfo,scheduleTimeInfo, date,dateList, token}}>
         {props.children}
     </MapYourTripContext.Provider>
   );

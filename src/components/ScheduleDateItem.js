@@ -19,7 +19,7 @@ const ScheduleDateItem = (props) => {
     handleSetDate(props.item.date)
     setAddMemoStart(true)
   }
-  
+  console.log(props)
 
   return (
     <div className="schedule-date-item-container">
@@ -31,14 +31,16 @@ const ScheduleDateItem = (props) => {
         </div>
         <div className='detail-schedule-container'>
           <div className='time-memo-list-container'>
-            {
+            { props.item.times.length !== 0 ?
               props.item.times.map((item,index)=>(
                 <ScheduleTimeItem key={index} item={item}/>
               ))
+              :<div className='time-empty'></div>
             }
 
-
-            <p></p>
+            <pre className='memo'>
+              {props.item.content}
+            </pre>
           </div>
           <div className='schedule-add-container'>
             <input className='detail-add-button' type='button' value={"장소 추가"} onClick={handleAddDetailSchedule}/>
