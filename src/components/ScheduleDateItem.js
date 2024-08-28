@@ -7,8 +7,7 @@ import MapYourTripContext from '../provider/MapYourTripContext';
 const ScheduleDateItem = (props) => {
   const [addScheduleStart,setAddScheduleStart] = useState(false);
   const [addMemoStart, setAddMemoStart] = useState(false);
-  const {handleSetDate,setScheduleTimeInfo} = useContext(MapYourTripContext);
-  const [times ,setTimes] = useState([]);
+  const {handleSetDate} = useContext(MapYourTripContext);
   //schedule 추가 창
   const handleAddDetailSchedule = () =>{
     handleSetDate(props.item.date)
@@ -21,10 +20,6 @@ const ScheduleDateItem = (props) => {
     setAddMemoStart(true)
   }
   
-  useEffect(()=>{
-    setTimes([...props.item.times]);
-  },[props.item])
-
 
   return (
     <div className="schedule-date-item-container">
@@ -37,7 +32,7 @@ const ScheduleDateItem = (props) => {
         <div className='detail-schedule-container'>
           <div className='time-memo-list-container'>
             {
-              times.map((item,index)=>(
+              props.item.times.map((item,index)=>(
                 <ScheduleTimeItem key={index} item={item}/>
               ))
             }
