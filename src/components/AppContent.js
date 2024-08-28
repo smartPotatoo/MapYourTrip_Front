@@ -26,7 +26,7 @@ const AppContent = () => {
             <Route path="/open-api/login" element={<Login />} />
             <Route path="/open-api/join" element={<Signup />} />
             <Route path="/mypage" element={<MyPage />} />
-            <Route path="/schedule/:type/:id" element={<WrappedMap/>}/> {/* type: {create: 일정 생성 페이지, modify: 일정 수정 페이지}, id: 일정 식별키*/}
+            <Route path="/schedule/:type/:id" element={<WrappedMap/>}/> {/* type: {create: 일정 생성 페이지, modify: 일정 수정 페이지, view: 일정 조회 페이지}, id: 일정 식별키*/}
           </Routes>
           </div>
         </div>

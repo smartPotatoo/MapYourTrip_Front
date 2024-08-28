@@ -26,14 +26,12 @@ const AddDetailSchedule = (props) => {
   }
 
   const handleComplete = (data) =>{
-    console.log(data)
     axios.get((`/map-geocode/v2/geocode?query=${data.address}`),{
       headers:{
         "X-NCP-APIGW-API-KEY-ID":process.env.REACT_APP_NAVER_MAP_CLIENT_ID,
         "X-NCP-APIGW-API-KEY":process.env.REACT_APP_NAVER_MAP_API_KEY
       }
     }).then(res=>{
-      console.log(res)
       setAddressInfo({ ...addressInfo,
         name: data.buildingName !== '' ? data.buildingName : data.address, 
         address: data.address,
@@ -64,7 +62,6 @@ const AddDetailSchedule = (props) => {
   }
 
   useEffect(()=>{
-    console.log(addressInfo)
     if(addressInfo.startTime !== ''&& addressInfo.endTime !== ''&& addressInfo.name !== ''&& addressInfo.x !== ''&& addressInfo.y !==''){
       setConfirm(false);
     }else{

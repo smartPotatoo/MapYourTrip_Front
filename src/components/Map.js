@@ -20,10 +20,8 @@ const Map = () => {
     handleSetScheduleId(id);
   },[])
 useEffect(()=>{
- console.log(detailScheduleInfo)
 },[detailScheduleInfo])
   useEffect(()=>{
-    console.log(dateList)
     let list = [];
     if(dateList.length !==0){
       dateList.forEach((date,dIdx)=>{

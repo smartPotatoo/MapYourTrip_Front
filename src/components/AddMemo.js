@@ -6,8 +6,6 @@ const AddMemo = (props) => {
   const [memo,setMemo] = useState('')
 
   useEffect(()=>{
-    console.log(scheduleMemoinfo)
-
     setMemo(scheduleMemoinfo);
   },[scheduleMemoinfo])
 

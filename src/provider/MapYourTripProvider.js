@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import MapYourTripContext from "./MapYourTripContext.js";
+import axios from "axios";
 const MapYourTripProvider = (props) =>{
   const [type,setType] = useState('');
   const [scheduleId,setScheduleId] = useState('');
@@ -7,6 +8,9 @@ const MapYourTripProvider = (props) =>{
   const [detailScheduleInfo,setDetailScheduleInfo] = useState([]);
 
   const [scheduleTimeInfo,setScheduleTimeInfo] = useState([]);
+
+  //일정 조회 구분
+  const [view, setView] = useState(false);
 
   //세부일정 생성 날짜
   const [date, setDate] = useState('');
@@ -16,6 +20,10 @@ const MapYourTripProvider = (props) =>{
 
   //메모 정보
   const [scheduleMemoinfo, setScheduleMemoinfo] = useState([]);
+
+  const handleSetView = (item) => {
+    setView(item)
+  }
 
   const handleSetScheduleMemoinfo = (item) =>{
     setScheduleMemoinfo(item);
@@ -55,7 +63,7 @@ const MapYourTripProvider = (props) =>{
 
 
   return (
-    <MapYourTripContext.Provider value={{handleSetType,handleSetScheduleMemoinfo,handleSetDateList, handleSetScheduleId,handleSetScheduleTimeInfo, handleSetDetailScheduleInfo,handleSetDetailScheduleDates, handleSetDate, handleSetToken, scheduleMemoinfo,type, scheduleId, detailScheduleInfo,scheduleTimeInfo, date,dateList, token}}>
+    <MapYourTripContext.Provider value={{handleSetType,handleSetScheduleMemoinfo,handleSetDateList,handleSetView, handleSetScheduleId,handleSetScheduleTimeInfo, handleSetDetailScheduleInfo,handleSetDetailScheduleDates, handleSetDate, handleSetToken, scheduleMemoinfo,type, scheduleId, detailScheduleInfo,scheduleTimeInfo, date,dateList, token, view}}>
         {props.children}
     </MapYourTripContext.Provider>
   );

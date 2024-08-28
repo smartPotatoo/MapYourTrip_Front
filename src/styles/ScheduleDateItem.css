@@ -59,6 +59,7 @@
   margin: auto;
   width: 225px;
   white-space: pre-wrap;
+  overflow-wrap: break-word;
 }
 .time-empty{
   padding: 40px;

@@ -2,29 +2,58 @@ import React, { useEffect, useContext, useState } from 'react';
 import '../styles/DetailScheduleList.css';
 import ScheduleDateItem from './ScheduleDateItem'
 import MapYourTripContext from '../provider/MapYourTripContext';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 const DetailScheduleList = () => {
-  const {handleSetDetailScheduleInfo, detailScheduleInfo, scheduleId, scheduleTimeInfo, date, handleSetDateList,dateList,type, scheduleMemoinfo} = useContext(MapYourTripContext);
+  const {handleSetDetailScheduleInfo,handleSetView,handleSetType, detailScheduleInfo, scheduleId, scheduleTimeInfo, date, handleSetDateList,dateList,type, scheduleMemoinfo,handleSetScheduleMemoinfo} = useContext(MapYourTripContext);
+  
+  const navigate = useNavigate();
+  
   const getSchedule = () =>{
     axios.get((`http://localhost:8081/open-api/schedule/${scheduleId}/detail`))
     .then(res=>{
-      console.log(res)
       handleSetDetailScheduleInfo(res.data.body)
     }).catch(err=>{
       console.log(err);
     })
     
-  }
+    }
   useEffect(()=>{
     getSchedule();
   },[])
 
+
+  useEffect(()=>{
+    if(type === 'create' || type === 'modify'){
+      handleSetView(false);
+      axios.get((`http://localhost:8081/mypage`),{
+        headers: {
+          Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiMiIsInN1YiI6IjIiLCJqdGkiOiIyIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTcyNDgyODQwOSwiZXhwIjoxNzI0OTE0ODA5fQ.p_zddIG55iqh1usKAwKxCVQVkyabSuxqq34rj5Lp3qI`
+        }
+      })
+      .then(res=>{
+        if(res.data.body.nickname !== detailScheduleInfo.nickname){
+          handleSetType('');
+          navigate('/mypage')
+          
+        }
+      }).catch(err=>{
+        console.log(err);
+      })
+    }else if(type === 'view'){
+      handleSetView(true);
+    }else{
+      handleSetType('');
+      navigate('/mypage')
+    }
+    
+    
+  },[type,detailScheduleInfo])
   
 
   useEffect(()=>{
     let startDate = detailScheduleInfo.startDate;
     let endDate = detailScheduleInfo.endDate
-    console.log(detailScheduleInfo)
     if(detailScheduleInfo && detailScheduleInfo.length !== 0 && type === 'create'){
       //시작날짜와 종료날짜에 따른 일일 날짜 리스트 생성
       const start = new Date(`20${startDate.slice(0, 2)}-${startDate.slice(2, 4)}-${startDate.slice(4, 6)}`);
@@ -49,7 +78,6 @@ const DetailScheduleList = () => {
   },[detailScheduleInfo])
 
   useEffect(()=>{
-    console.log(dateList)
     if(scheduleTimeInfo.length !== 0){
       dateList.forEach((item)=>{
         if(item.date === date){
