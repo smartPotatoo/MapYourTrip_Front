@@ -15,35 +15,36 @@ const AddScheduleTitle = (props) => {
         put();
       }
     }
-    handleSetType('');
-    navigate('/mypage');
+
   }
 
   const add = () =>{
-    axios.post((`http://localhost:8081/schedule/${scheduleId}/detail`),{
+    axios.post(`http://localhost:8081/schedule/${scheduleId}/detail`,{
       schedulesDateList:dateList
     },{
-      headers: {
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiMSIsInN1YiI6IjEiLCJqdGkiOiIxIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTcyNDgwMzkwOSwiZXhwIjoxNzI0ODkwMzA5fQ.5WdlA_wslVzoGZhD2ezExsiE5wcsUibmnVIJC0KdKjE`
+      "headers": {
+        "Authorization": `Bearer eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiMiIsInN1YiI6IjIiLCJqdGkiOiIyIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTcyNDgzMjQ5NiwiZXhwIjoxNzI0OTE4ODk2fQ._smY2Yn8oNCPKfH7V6bxT-Lc_P69tvjti1rqQ7ISc08`
     }
     })
     .then(res=>{
-
+      handleSetType('');
+      navigate('/mypage');
     }).catch(err=>{
       console.log(err);
     })
   }
 
   const put = () =>{
-    axios.put((`http://localhost:8081/schedule/${scheduleId}/detail`),{
+    axios.put(`http://localhost:8081/schedule/${scheduleId}/detail`,{
       schedulesDateList:dateList
     },{
-      headers: {
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiMSIsInN1YiI6IjEiLCJqdGkiOiIxIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTcyNDgwMzkwOSwiZXhwIjoxNzI0ODkwMzA5fQ.5WdlA_wslVzoGZhD2ezExsiE5wcsUibmnVIJC0KdKjE`
+      "headers": {
+        "Authorization": `Bearer eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiMiIsInN1YiI6IjIiLCJqdGkiOiIyIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTcyNDgzMjQ5NiwiZXhwIjoxNzI0OTE4ODk2fQ._smY2Yn8oNCPKfH7V6bxT-Lc_P69tvjti1rqQ7ISc08`
       }
     })
     .then(res=>{
-
+      handleSetType('');
+      navigate('/mypage');
     }).catch(err=>{
       console.log(err);
     })

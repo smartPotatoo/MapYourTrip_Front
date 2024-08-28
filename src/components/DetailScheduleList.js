@@ -26,20 +26,26 @@ const DetailScheduleList = () => {
   useEffect(()=>{
     if(type === 'create' || type === 'modify'){
       handleSetView(false);
-      axios.get((`http://localhost:8081/mypage`),{
-        headers: {
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiMiIsInN1YiI6IjIiLCJqdGkiOiIyIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTcyNDgyODQwOSwiZXhwIjoxNzI0OTE0ODA5fQ.p_zddIG55iqh1usKAwKxCVQVkyabSuxqq34rj5Lp3qI`
-        }
-      })
-      .then(res=>{
-        if(res.data.body.nickname !== detailScheduleInfo.nickname){
-          handleSetType('');
-          navigate('/mypage')
-          
-        }
-      }).catch(err=>{
-        console.log(err);
-      })
+      console.log(detailScheduleInfo)
+      if(detailScheduleInfo.nickname != undefined){
+        axios.get(`http://localhost:8081/mypage`,{
+          "headers": {
+            "Authorization": `Bearer eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiMiIsInN1YiI6IjIiLCJqdGkiOiIyIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTcyNDgzMjQ5NiwiZXhwIjoxNzI0OTE4ODk2fQ._smY2Yn8oNCPKfH7V6bxT-Lc_P69tvjti1rqQ7ISc08`
+          }
+        })
+        .then(res=>{
+          console.log(res.data.body.nickname)
+          console.log(detailScheduleInfo.nickname)
+          if(res.data.body.nickname !== detailScheduleInfo.nickname){
+            handleSetType('');
+            navigate('/mypage')
+            
+          }
+        }).catch(err=>{
+          console.log(err);
+        })
+      }
+      
     }else if(type === 'view'){
       handleSetView(true);
     }else{
