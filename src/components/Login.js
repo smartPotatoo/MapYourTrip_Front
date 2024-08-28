@@ -10,7 +10,6 @@ const Login = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [shake, setShake] = useState(false); // 애니메이션을 위한 상태
   const API_URL = process.env.REACT_APP_API_URL;
-  console.log(API_URL);
   const { handleSetToken } = useContext(MapYourTripContext);
 
   const handleLogin = async (e) => {
@@ -33,14 +32,16 @@ const Login = () => {
 
       if (response.ok) {
         const result = await response.json();
+        // JWT 토큰을 sessionStorage에 저장
+        sessionStorage.setItem('token', result.body.token);
         handleSetToken(result.body.token);
-        console.log("로그인 성공:", result);
-        navigate('/'); // 메인 페이지로 이동
+        console.log('로그인 성공');
+        navigate('/'); // 로그인 성공 시 메인 페이지로 이동
       } else {
         const errorData = await response.json();
         setErrorMessage(errorData.message || '로그인에 실패했습니다.');
-        console.log("로그인 실패:", errorData);
         setShake(true); // 로그인 실패 시 애니메이션 시작
+        console.log('로그인 실패:', errorData.message);
       }
     } catch (error) {
       console.error('로그인 중 오류 발생:', error);
@@ -51,7 +52,7 @@ const Login = () => {
 
   return (
     <div id="login-root" className="login-page">
-      <h1 className="logo">MainYourTrip</h1>
+      <h1 className="logo">MapYourTrip</h1>
       <div className={`login-container ${shake ? 'shake' : ''}`} onAnimationEnd={() => setShake(false)}>
         <div className="input-group">
           <label htmlFor="username">아이디</label>

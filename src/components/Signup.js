@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios'; // axios를 임포트
+import axios from 'axios';
 import '../styles/Signup.css';
 
 const Signup = () => {
@@ -41,7 +41,7 @@ const Signup = () => {
 
     if (!usernameError && !passwordError) {
       try {
-        // 백엔드로 회원가입 데이터를 전송합니다.
+        // 백엔드로 회원가입 데이터를 전송
         const response = await axios.post(`${API_URL}/open-api/join`, {
           username,
           nickname,
@@ -49,10 +49,19 @@ const Signup = () => {
         });
 
         if (response.status === 200) {
-          // 회원가입 성공 시 로그인 페이지로 이동
-          navigate('/open-api/login');
-        } else {
-          console.error('회원가입 실패:', response.data);
+          // 회원가입 성공 시 로그인 요청
+          const loginResponse = await axios.post(`${API_URL}/open-api/login`, {
+            username,
+            password,
+          });
+
+          if (loginResponse.status === 200) {
+            // 로그인 성공 시 JWT 토큰을 sessionStorage에 저장
+            sessionStorage.setItem('token', loginResponse.data.body.token);
+
+            // 메인 페이지로 이동
+            navigate('/');
+          }
         }
       } catch (error) {
         console.error('회원가입 중 오류 발생:', error);
