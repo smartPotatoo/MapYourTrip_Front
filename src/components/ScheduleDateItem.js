@@ -22,9 +22,9 @@ const ScheduleDateItem = (props) => {
   }
   
   useEffect(()=>{
-    console.log(props.item.times)
-    setTimes(props.item.times);
+    setTimes([...props.item.times]);
   },[props.item])
+
 
   return (
     <div className="schedule-date-item-container">

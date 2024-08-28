@@ -1,4 +1,4 @@
-import {  useRef, useState } from "react";
+import { useState } from "react";
 import MapYourTripContext from "./MapYourTripContext.js";
 const MapYourTripProvider = (props) =>{
   const [type,setType] = useState('');
@@ -28,9 +28,11 @@ const MapYourTripProvider = (props) =>{
 
   const handleSetDetailScheduleInfo = (item) =>{
     setDetailScheduleInfo(item)
+    handleSetDateList(item.schedulesDateList);
   }
   const handleSetDetailScheduleDates = (item) =>{
     setDetailScheduleInfo({...detailScheduleInfo,times:item});
+
   }
 
   const handleSetScheduleId = (item)=>{
