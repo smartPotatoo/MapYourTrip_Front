@@ -15,6 +15,8 @@ const AddDetailSchedule = (props) => {
     y:''
   });
 
+  const [confirm, setConfirm] = useState(true);
+
   const {handleSetScheduleTimeInfo} = useContext(MapYourTripContext);
   const [address,setAddress] = useState('');
   const open = useDaumPostcodePopup("https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js");
@@ -60,7 +62,15 @@ const AddDetailSchedule = (props) => {
   const handleSetEndTime=(e)=>{
     setAddressInfo({...addressInfo,endTime : e.target.value})
   }
-console.log(addressInfo)
+
+  useEffect(()=>{
+    console.log(addressInfo)
+    if(addressInfo.startTime !== ''&& addressInfo.endTime !== ''&& addressInfo.name !== ''&& addressInfo.x !== ''&& addressInfo.y !==''){
+      setConfirm(false);
+    }else{
+      setConfirm(true);
+    }
+  },[addressInfo])
   return(
     <>
       <div className="add-detail-schedule-container">
@@ -80,7 +90,7 @@ console.log(addressInfo)
           </div>
         </div>
         <div className="add-detail-schedule-button-container">
-          <input className="add-detail-schedule-button" type="button" value="장소 추가" onClick={()=>click()}/>
+          <input className="add-detail-schedule-button" disabled={confirm} type="button" value="장소 추가" onClick={()=>click()}/>
         </div>
       </div>
           

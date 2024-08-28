@@ -8,6 +8,7 @@ const DetailScheduleList = () => {
   const getSchedule = () =>{
     axios.get((`http://localhost:8081/open-api/schedule/${scheduleId}/detail`))
     .then(res=>{
+      console.log(res)
       handleSetDetailScheduleInfo(res.data.body)
     }).catch(err=>{
       console.log(err);
@@ -23,8 +24,8 @@ const DetailScheduleList = () => {
   useEffect(()=>{
     let startDate = detailScheduleInfo.startDate;
     let endDate = detailScheduleInfo.endDate
-
-    if(detailScheduleInfo.length !== 0 && type === 'create'){
+    console.log(detailScheduleInfo)
+    if(detailScheduleInfo && detailScheduleInfo.length !== 0 && type === 'create'){
       //시작날짜와 종료날짜에 따른 일일 날짜 리스트 생성
       const start = new Date(`20${startDate.slice(0, 2)}-${startDate.slice(2, 4)}-${startDate.slice(4, 6)}`);
       const end = new Date(`20${endDate.slice(0, 2)}-${endDate.slice(2, 4)}-${endDate.slice(4, 6)}`);
@@ -71,11 +72,12 @@ const DetailScheduleList = () => {
 
   return (
     <div className="detail-schedule-list-container">
-      {
+      { dateList && dateList.length > 0 ?
         dateList.map((item,index)=>(
           <ScheduleDateItem key={index} index={index} item={item}/>
 
         ))
+        :<p>No schedules available</p>
       }
     </div>
   );

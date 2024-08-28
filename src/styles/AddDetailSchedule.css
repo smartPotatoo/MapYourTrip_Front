@@ -37,6 +37,10 @@
 .add-detail-schedule-button:active{
   opacity: .3;
 }
+.add-detail-schedule-button:disabled{
+  cursor: default;
+  opacity: .5;
+}
 .add-detail-schedule-content-container .content-container{
   display: flex;
   justify-content: center;
