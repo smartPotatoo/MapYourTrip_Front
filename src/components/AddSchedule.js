@@ -24,7 +24,6 @@ const AddSchedule = (props) => {
       }
     })
     .then(res=>{
-      console.log(res)
       navigate(`/schedule/create/${res.data.body.id}`);
     }).catch(err=>{
       console.log(err);

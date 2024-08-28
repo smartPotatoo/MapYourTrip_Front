@@ -26,7 +26,6 @@ const DetailScheduleList = () => {
   useEffect(()=>{
     if(type === 'create' || type === 'modify'){
       handleSetView(false);
-      console.log(detailScheduleInfo)
       if(detailScheduleInfo.nickname != undefined){
         axios.get(`http://localhost:8081/mypage`,{
           headers: {
@@ -34,8 +33,6 @@ const DetailScheduleList = () => {
           }
         })
         .then(res=>{
-          console.log(res.data.body.nickname)
-          console.log(detailScheduleInfo.nickname)
           if(res.data.body.nickname !== detailScheduleInfo.nickname){
             handleSetType('');
             navigate('/mypage')
