@@ -29,8 +29,10 @@ const Sidebar = () => {
       ) : (
         <>
           <DetailScheduleList />
-          <div><Link to="/mypage" className="menu-item">Profile</Link></div>
-          <div className="menu-item logout-button" onClick={handleLogout}>Sign Out</div>
+          <div className="profile-logout-container">
+            <Link to="/mypage" className="menu-item small-button">Profile</Link>
+            <div className="menu-item small-button logout-button" onClick={handleLogout}>Sign Out</div>
+          </div>
         </>
       )}
     </div>
