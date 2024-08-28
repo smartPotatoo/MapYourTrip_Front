@@ -23,7 +23,7 @@ const ScheduleDateItem = (props) => {
 
   return (
     <div className="schedule-date-item-container">
-      {addScheduleStart ? <Add btn={true} onOff={setAddScheduleStart} content={"schedule"} /> : null}
+      {addScheduleStart ? <Add btn={true} onOff={setAddScheduleStart} content={"date"} /> : null}
       {addMemoStart ? <Add btn={true} onOff={setAddMemoStart} content={"memo"} /> : null}
       <div className='detail-date-container'>
         <div className='date-container'>
