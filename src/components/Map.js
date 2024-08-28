@@ -8,7 +8,7 @@ import MapYourTripContext from '../provider/MapYourTripContext';
 const Map = () => {
   const navermaps = useNavermaps();
 
-  const {handleSetType, handleSetScheduleId} = useContext(MapYourTripContext);
+  const {handleSetType, handleSetScheduleId, dateList} = useContext(MapYourTripContext);
 
   //path variable value
   const {type, id} = useParams();
@@ -17,6 +17,11 @@ const Map = () => {
     handleSetType(type);
     handleSetScheduleId(id);
   },[])
+
+  useEffect(()=>{
+    console.log(dateList)
+
+  },[dateList])
 
   return (
     <NaverMap

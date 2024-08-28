@@ -10,7 +10,7 @@ const Add = (props) => {
   }
 
   useEffect(()=>{
-    if(props.btn == false){
+    if(props.btn === false){
         props.onOff(false);
     }
   },[])
