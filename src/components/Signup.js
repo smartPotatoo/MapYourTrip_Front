@@ -49,19 +49,8 @@ const Signup = () => {
         });
 
         if (response.status === 200) {
-          // 회원가입 성공 시 로그인 요청
-          const loginResponse = await axios.post(`${API_URL}/open-api/login`, {
-            username,
-            password,
-          });
-
-          if (loginResponse.status === 200) {
-            // 로그인 성공 시 JWT 토큰을 sessionStorage에 저장
-            sessionStorage.setItem('token', loginResponse.data.body.token);
-
-            // 메인 페이지로 이동
-            navigate('/');
-          }
+          // 회원가입 성공 시 로그인 페이지로 이동
+          navigate('/open-api/login');
         }
       } catch (error) {
         console.error('회원가입 중 오류 발생:', error);
