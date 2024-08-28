@@ -1,0 +1,29 @@
+.schedule-list {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background-color: #f9f9f9;
+    margin-left: 250px; /* Sidebar width adjustment */
+    margin-top: 60px;   /* Adjusted for the header height */
+    width: calc(100% - 250px); /* Adjust the width to account for the sidebar */
+    position: relative;
+    z-index: 0; /* Ensure the content stays behind the fixed header */
+}
+
+.schedule-card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.schedule-card h3 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.schedule-card p {
+    margin: 5px 0;
+    font-size: 1rem;
+}
