@@ -7,7 +7,7 @@ import MapYourTripContext from '../provider/MapYourTripContext';
 const ScheduleDateItem = (props) => {
   const [addScheduleStart,setAddScheduleStart] = useState(false);
   const [addMemoStart, setAddMemoStart] = useState(false);
-  const {handleSetDate} = useContext(MapYourTripContext);
+  const {handleSetDate, view, handleSetScheduleMemoinfo} = useContext(MapYourTripContext);
   //schedule 추가 창
   const handleAddDetailSchedule = () =>{
     handleSetDate(props.item.date)
@@ -16,10 +16,10 @@ const ScheduleDateItem = (props) => {
 
   //memo 추가 창
   const handleAddMemo = () =>{
+    handleSetScheduleMemoinfo(props.item.content)
     handleSetDate(props.item.date)
     setAddMemoStart(true)
   }
-  console.log(props)
 
   return (
     <div className="schedule-date-item-container">
@@ -42,10 +42,16 @@ const ScheduleDateItem = (props) => {
               {props.item.content}
             </pre>
           </div>
-          <div className='schedule-add-container'>
-            <input className='detail-add-button' type='button' value={"장소 추가"} onClick={handleAddDetailSchedule}/>
-            <input className='detail-memo-button' type='button' value={"메모 추가"} onClick={handleAddMemo}/>
-          </div>
+            {
+              !view ?
+              <div className='schedule-add-container'>
+              
+                <input className='detail-add-button' type='button' value={"장소 추가"} onClick={handleAddDetailSchedule}/>
+                <input className='detail-memo-button' type='button' value={"메모 추가"} onClick={handleAddMemo}/>
+              </div>
+              :null
+            }
+            
         </div>
       </div>
     </div>

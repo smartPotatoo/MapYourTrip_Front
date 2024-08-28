@@ -1,22 +1,22 @@
 import '../styles/AddScheduleTitle.css'
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import MapYourTripContext from '../provider/MapYourTripContext';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 const AddScheduleTitle = (props) => {
   const navigate = useNavigate();
-  const {detailScheduleInfo,dateList,handleSetDetailScheduleInfo,scheduleId,type,handleSetType} = useContext(MapYourTripContext);
+  const {detailScheduleInfo,dateList,view,scheduleId,type,handleSetType} = useContext(MapYourTripContext);
 
   const click = () =>{
-    if(type === 'create'){
-      console.log('create')
-      add();
-    }else{
-      console.log('put')
-      put();
+    if(!view){
+      if(type === 'create'){
+        add();
+      }else if(type === 'modify'){
+        put();
+      }
     }
     handleSetType('');
-    navigate('/mypage')
+    navigate('/mypage');
   }
 
   const add = () =>{
@@ -59,7 +59,11 @@ const AddScheduleTitle = (props) => {
           <input  type="text" className="add-schedule-title-input" readOnly name="title" value={detailScheduleInfo.tripName}/>
         </div>
         <div className="add-schedule-title-button-container">
-          <input type="button" className="add-schedule-title-button" value={"completion"} onClick={click}/>
+          {
+            !view ? 
+              <input  type="button" className="add-schedule-title-button" value={"completion"} onClick={click}/>
+            :null
+          }
         </div>
       </div>
     </>
