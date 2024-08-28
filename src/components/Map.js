@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container as MapDiv, NaverMap, Marker, useNavermaps } from 'react-naver-maps';
+import { Container as MapDiv, NaverMap, useNavermaps } from 'react-naver-maps';
 import { NavermapsProvider } from 'react-naver-maps';
 import {useParams} from "react-router"
 import { useEffect, useState ,useContext} from 'react';
@@ -10,7 +10,6 @@ const Map = () => {
   const [map,setMap] = useState(null);
   const {handleSetType, handleSetScheduleId, dateList,detailScheduleInfo} = useContext(MapYourTripContext);
   const [timeList,setTimeList] = useState([]);
-  const [markerList, setMarkerList] = useState([]);
 
   //path variable value
   const {type, id} = useParams();
@@ -38,7 +37,6 @@ useEffect(()=>{
   useEffect(()=>{
     if(timeList.length !== 0){
       timeList.forEach((item)=>{
-        console.log(item)
         let marker = new navermaps.Marker({
           map: map,
           position: new navermaps.LatLng(item.y, item.x)

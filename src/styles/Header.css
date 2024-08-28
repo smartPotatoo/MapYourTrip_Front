@@ -16,6 +16,8 @@
     position: relative;
     display: flex;
     align-items: center;
+    width: 80vw;
+    justify-content: space-between;
   }
   
   .search-bar {
@@ -28,7 +30,7 @@
   
   .search-button {
     position: absolute;
-    right: 10px;
+    left: 330px;
     background: none;
     border: none;
     cursor: pointer;
@@ -41,3 +43,20 @@
     object-fit: contain;
   }
   
+  .create-schedule-button{
+    all: unset;
+    border: 1px solid #333;
+    text-align: center;
+    width: 150px;
+    height: 38px;
+    border-radius: 15px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    background-color: #0d47a1;
+    color: white;
+  }
+  
+  .create-schedule-button:active{
+    opacity: .7;
+  }
