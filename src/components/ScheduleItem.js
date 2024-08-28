@@ -6,10 +6,11 @@ import { useNavigate } from 'react-router-dom';
 const ScheduleItem = ({ schedule, token }) => {
     const {handleSetScheduleId} = useContext(MapYourTripContext);
     const navigate = useNavigate();
+    const type = token ? 'modify' : 'view';
 
     const handleClick = (scheduleId) => {
         handleSetScheduleId(scheduleId);
-        navigate(`/schedule/view/${scheduleId}`, { state: { token } });
+        navigate(`/schedule/${type}/${scheduleId}`, { state: { token } });
     }
 
     return (

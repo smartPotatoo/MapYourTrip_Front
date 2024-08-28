@@ -10,7 +10,7 @@ const DetailScheduleList = () => {
   const navigate = useNavigate();
   
   const getSchedule = () =>{
-    axios.get((`http://localhost:8081/open-api/schedule/${scheduleId}/detail`))
+    axios.get((`${process.env.REACT_APP_API_URL}/open-api/schedule/${scheduleId}/detail`))
     .then(res=>{
       handleSetDetailScheduleInfo(res.data.body)
     }).catch(err=>{
