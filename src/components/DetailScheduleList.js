@@ -4,7 +4,7 @@ import ScheduleDateItem from './ScheduleDateItem'
 import MapYourTripContext from '../provider/MapYourTripContext';
 import axios from 'axios';
 const DetailScheduleList = () => {
-  const {handleSetDetailScheduleInfo, detailScheduleInfo, scheduleId, scheduleTimeInfo, date, handleSetDateList,dateList,type} = useContext(MapYourTripContext);
+  const {handleSetDetailScheduleInfo, detailScheduleInfo, scheduleId, scheduleTimeInfo, date, handleSetDateList,dateList,type, scheduleMemoinfo} = useContext(MapYourTripContext);
   const getSchedule = () =>{
     axios.get((`http://localhost:8081/open-api/schedule/${scheduleId}/detail`))
     .then(res=>{
@@ -54,7 +54,7 @@ const DetailScheduleList = () => {
       dateList.forEach((item)=>{
         if(item.date === date){
           item.times.push(scheduleTimeInfo)
-
+          
           item.times.sort((a, b) => {
             const timeA = a.startTime.split(':').map(Number);
             const timeB = b.startTime.split(':').map(Number);
@@ -68,6 +68,15 @@ const DetailScheduleList = () => {
     
   },[scheduleTimeInfo])
 
+  useEffect(()=>{
+    dateList.forEach((item)=>{
+      if(item.date === date){
+        item.content = scheduleMemoinfo;
+      }
+    })
+
+    handleSetDateList([...dateList])
+  },[scheduleMemoinfo])
 
 
   return (
