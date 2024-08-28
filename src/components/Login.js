@@ -1,16 +1,14 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Login.css';
-import MapYourTripContext from '../provider/MapYourTripContext';
 
 const Login = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-  const [shake, setShake] = useState(false); // 애니메이션을 위한 상태
+  const [shake, setShake] = useState(false); 
   const API_URL = process.env.REACT_APP_API_URL;
-  const { handleSetToken, handleSetType } = useContext(MapYourTripContext);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -21,7 +19,7 @@ const Login = () => {
     };
 
     try {
-      const response = await fetch(API_URL + '/open-api/login', {
+      const response = await fetch(`${API_URL}/open-api/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -31,19 +29,17 @@ const Login = () => {
 
       if (response.ok) {
         const result = await response.json();
-        sessionStorage.setItem('token', result.body.token);
-        handleSetToken(result.body.token); // token을 context에 저장
-        handleSetType('user'); // 사용자의 로그인 상태를 나타내기 위해 type을 설정
-        navigate('/');
+        sessionStorage.setItem('token', result.body.token); // JWT 토큰을 sessionStorage에 저장
+        navigate('/'); // 로그인 성공 시 메인 페이지로 이동
       } else {
         const errorData = await response.json();
         setErrorMessage(errorData.message || '로그인에 실패했습니다.');
-        setShake(true); // 로그인 실패 시 애니메이션 시작
+        setShake(true); 
       }
     } catch (error) {
       console.error('로그인 중 오류 발생:', error);
       setErrorMessage('서버와의 연결에 문제가 발생했습니다.');
-      setShake(true); // 로그인 실패 시 애니메이션 시작
+      setShake(true); 
     }
   };
 
