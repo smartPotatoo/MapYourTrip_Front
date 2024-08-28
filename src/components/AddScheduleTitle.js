@@ -1,7 +1,24 @@
 import '../styles/AddScheduleTitle.css'
+import { useContext } from 'react';
+import MapYourTripContext from '../provider/MapYourTripContext';
+import axios from 'axios';
 const AddScheduleTitle = (props) => {
 
-
+  const {detailScheduleInfo,dateList,handleSetDetailScheduleInfo,scheduleId} = useContext(MapYourTripContext);
+  const add = () =>{
+    axios.post((`http://localhost:8081/schedule/${scheduleId}/detail`),{
+      schedulesDateList:dateList
+    },{
+      headers: {
+        Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiMSIsInN1YiI6IjEiLCJqdGkiOiIxIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTcyNDgwMzkwOSwiZXhwIjoxNzI0ODkwMzA5fQ.5WdlA_wslVzoGZhD2ezExsiE5wcsUibmnVIJC0KdKjE`
+    }
+    })
+    .then(res=>{
+      handleSetDetailScheduleInfo(res.data.body);
+    }).catch(err=>{
+      console.log(err);
+    })
+  }
   return(
     <>
       <div className="add-schedule-title-container">
@@ -9,10 +26,10 @@ const AddScheduleTitle = (props) => {
           <label htmlFor="title">
             여행 이름
           </label>
-          <input type="text" className="add-schedule-title-input" name="title"/>
+          <input  type="text" className="add-schedule-title-input" readOnly name="title" value={detailScheduleInfo.tripName}/>
         </div>
         <div className="add-schedule-title-button-container">
-          <input type="button" className="add-schedule-title-button" value={"completion"}/>
+          <input type="button" className="add-schedule-title-button" value={"completion"} onClick={add}/>
         </div>
       </div>
     </>
