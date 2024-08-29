@@ -35,10 +35,6 @@ const Header = () => {
         {
           type === '' ? (
             <>
-              <input className="search-bar" placeholder="Search..." />
-              <button className="search-button">
-                <img src={searchIcon} alt="Search" />
-              </button>
               {isLoggedIn && ( // 로그인한 상태에서만 버튼을 표시
                 <input type='button' className='create-schedule-button' value={buttonValue} onClick={handleAddDetailSchedule} />
               )}
