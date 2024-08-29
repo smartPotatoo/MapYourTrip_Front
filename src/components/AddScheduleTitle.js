@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 const AddScheduleTitle = (props) => {
   const navigate = useNavigate();
-  const {detailScheduleInfo,dateList,view,scheduleId,type} = useContext(MapYourTripContext);
+  const {detailScheduleInfo,dateList,view,scheduleId,handleSetScheduleTimeInfo,type} = useContext(MapYourTripContext);
   const token = sessionStorage.getItem('token'); 
   const click = () =>{
     if(!view){
@@ -27,6 +27,7 @@ const AddScheduleTitle = (props) => {
     }
     })
     .then(res=>{
+      handleSetScheduleTimeInfo([])
       navigate('/mypage');
     }).catch(err=>{
       console.log(err);
@@ -42,6 +43,7 @@ const AddScheduleTitle = (props) => {
       }
     })
     .then(res=>{
+      handleSetScheduleTimeInfo([])
       navigate('/mypage');
     }).catch(err=>{
       console.log(err);
