@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
+import { React, useEffect, useState, useContext } from 'react';
 import { FaSave } from 'react-icons/fa'; 
 import editIcon from '../assets/icon_edit.svg';
 import defaultProfileImage from '../assets/icon_person.svg';
