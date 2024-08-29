@@ -1,9 +1,9 @@
-
 import '../styles/AddDetailSchedule.css'
 import { IoIosSearch } from "react-icons/io";
 import axios from 'axios';
 import { useEffect, useState, useContext } from 'react';
 import MapYourTripContext from '../provider/MapYourTripContext';
+import { useDaumPostcodePopup } from "react-daum-postcode";
 const AddDetailSchedule = (props) => {
   const [addressInfo, setAddressInfo] = useState({
     startTime:'',
@@ -14,20 +14,26 @@ const AddDetailSchedule = (props) => {
     y:''
   });
 
-  const {handleSetScheduleTimeInfo} = useContext(MapYourTripContext);
+  const [confirm, setConfirm] = useState(true);
 
+  const {handleSetScheduleTimeInfo} = useContext(MapYourTripContext);
   const [address,setAddress] = useState('');
+  const open = useDaumPostcodePopup("https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js");
   
-  const search = () =>{
-    axios.get((`/map-geocode/v2/geocode?query=${address}`),{
+  const selectAddress = (e) => {
+    open({ onComplete: handleComplete });
+  }
+
+  const handleComplete = (data) =>{
+    axios.get((`/map-geocode/v2/geocode?query=${data.address}`),{
       headers:{
         "X-NCP-APIGW-API-KEY-ID":process.env.REACT_APP_NAVER_MAP_CLIENT_ID,
         "X-NCP-APIGW-API-KEY":process.env.REACT_APP_NAVER_MAP_API_KEY
       }
     }).then(res=>{
       setAddressInfo({ ...addressInfo,
-        name: res.data.addresses[0].jibunAddress, 
-        address: res.data.addresses[0].roadAddress,
+        name: data.buildingName !== '' ? data.buildingName : data.address, 
+        address: data.address,
         x: res.data.addresses[0].x,
         y: res.data.addresses[0].y
       })
@@ -54,14 +60,21 @@ const AddDetailSchedule = (props) => {
     setAddressInfo({...addressInfo,endTime : e.target.value})
   }
 
+  useEffect(()=>{
+    if(addressInfo.startTime !== ''&& addressInfo.endTime !== ''&& addressInfo.name !== ''&& addressInfo.x !== ''&& addressInfo.y !==''){
+      setConfirm(false);
+    }else{
+      setConfirm(true);
+    }
+  },[addressInfo])
   return(
     <>
       <div className="add-detail-schedule-container">
         <div className="add-detail-schedule-content-container">
           <div className="content-container">
             <label htmlFor='palce-name' className="content-name">여행 장소</label>
-            <input type="text" name='palce-name' className='palce-name' onChange={handleSetAddress}/>
-            <IoIosSearch size={25} className="searchIcon" onClick={()=>search()}/>
+            <input type="text" name='palce-name' className='palce-name' readOnly value={addressInfo.name}/>
+            <IoIosSearch size={25} className="searchIcon" onClick={()=>selectAddress()}/>
           </div>
           <div className="content-container">
             <label htmlFor="start-time" className="content-name">시작 시간</label>
@@ -73,7 +86,7 @@ const AddDetailSchedule = (props) => {
           </div>
         </div>
         <div className="add-detail-schedule-button-container">
-          <input className="add-detail-schedule-button" type="button" value="장소 추가" onClick={()=>click()}/>
+          <input className="add-detail-schedule-button" disabled={confirm} type="button" value="장소 추가" onClick={()=>click()}/>
         </div>
       </div>
           

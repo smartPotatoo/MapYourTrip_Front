@@ -1,0 +1,9 @@
+.schedule-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* 아이템들을 중앙에 정렬 */
+    gap: 20px; /* 아이템들 사이의 간격 */
+    padding: 20px;
+    margin-left: 250px; /* Sidebar 넓이를 고려한 마진 */
+    margin-bottom: 100px;
+}

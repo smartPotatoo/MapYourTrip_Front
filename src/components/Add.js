@@ -3,6 +3,7 @@ import '../styles/Add.css'
 import { HiMiniXMark } from "react-icons/hi2";
 import AddDetailSchedule from './AddDetailSchedule'
 import AddMemo from "./AddMemo";
+import AddSchedule from "./AddSchedule";
 const Add = (props) => {
   //Add창을 종료시킵니다.
   const click = () => {
@@ -10,7 +11,7 @@ const Add = (props) => {
   }
 
   useEffect(()=>{
-    if(props.btn == false){
+    if(props.btn === false){
         props.onOff(false);
     }
   },[])
@@ -21,9 +22,11 @@ const Add = (props) => {
         <div className="confirm-container">
           <HiMiniXMark size={30} className='deleteIcon' onClick={click}/>
           {
-            props.content === 'schedule' ? 
-            <AddDetailSchedule click={click}/>
-            :<AddMemo click={click}/>
+            props.content === 'date' ? 
+            <AddDetailSchedule click={click}/> //장소 추가
+            :props.content === 'schedule' ?
+            <AddSchedule click={click}/> // 일정 추가
+            : <AddMemo click={click}/> //메모 추가
           }
           
         </div>

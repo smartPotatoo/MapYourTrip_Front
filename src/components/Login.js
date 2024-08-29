@@ -43,10 +43,16 @@ const Login = () => {
     }
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      handleLogin(e); // Enter 키를 누르면 로그인 시도
+    }
+  };
+
   return (
     <div id="login-root" className="login-page">
       <h1 className="logo">MapYourTrip</h1>
-      <div className={`login-container ${shake ? 'shake' : ''}`} onAnimationEnd={() => setShake(false)}>
+      <form className={`login-container ${shake ? 'shake' : ''}`} onAnimationEnd={() => setShake(false)}>
         <div className="input-group">
           <label htmlFor="username">아이디</label>
           <input
@@ -55,6 +61,7 @@ const Login = () => {
             placeholder="아이디를 입력해주세요"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            autoFocus // 자동으로 포커스 설정
           />
         </div>
         <div className="input-group">
@@ -65,6 +72,7 @@ const Login = () => {
             placeholder="비밀번호를 입력해주세요"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            onKeyDown={handleKeyDown} // 엔터키 핸들러 추가
           />
         </div>
         {errorMessage && <small className="error-text">{errorMessage}</small>}
@@ -74,7 +82,7 @@ const Login = () => {
         <div className="signup-link">
           <a href="/open-api/join">회원가입</a>
         </div>
-      </div>
+      </form>
     </div>
   );
 };

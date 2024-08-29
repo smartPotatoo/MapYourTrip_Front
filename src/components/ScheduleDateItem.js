@@ -7,8 +7,7 @@ import MapYourTripContext from '../provider/MapYourTripContext';
 const ScheduleDateItem = (props) => {
   const [addScheduleStart,setAddScheduleStart] = useState(false);
   const [addMemoStart, setAddMemoStart] = useState(false);
-  const {handleSetDate,setScheduleTimeInfo} = useContext(MapYourTripContext);
-  const [times ,setTimes] = useState([]);
+  const {handleSetDate, view, handleSetScheduleMemoinfo} = useContext(MapYourTripContext);
   //schedule 추가 창
   const handleAddDetailSchedule = () =>{
     handleSetDate(props.item.date)
@@ -17,18 +16,14 @@ const ScheduleDateItem = (props) => {
 
   //memo 추가 창
   const handleAddMemo = () =>{
+    handleSetScheduleMemoinfo(props.item.content)
     handleSetDate(props.item.date)
     setAddMemoStart(true)
   }
-  
-  useEffect(()=>{
-    setTimes([...props.item.times]);
-  },[props.item])
-
 
   return (
     <div className="schedule-date-item-container">
-      {addScheduleStart ? <Add btn={true} onOff={setAddScheduleStart} content={"schedule"} /> : null}
+      {addScheduleStart ? <Add btn={true} onOff={setAddScheduleStart} content={"date"} /> : null}
       {addMemoStart ? <Add btn={true} onOff={setAddMemoStart} content={"memo"} /> : null}
       <div className='detail-date-container'>
         <div className='date-container'>
@@ -36,19 +31,27 @@ const ScheduleDateItem = (props) => {
         </div>
         <div className='detail-schedule-container'>
           <div className='time-memo-list-container'>
-            {
-              times.map((item,index)=>(
+            { props.item.times.length !== 0 ?
+              props.item.times.map((item,index)=>(
                 <ScheduleTimeItem key={index} item={item}/>
               ))
+              :<div className='time-empty'></div>
             }
 
-
-            <p></p>
+            <pre className='memo'>
+              {props.item.content}
+            </pre>
           </div>
-          <div className='schedule-add-container'>
-            <input className='detail-add-button' type='button' value={"장소 추가"} onClick={handleAddDetailSchedule}/>
-            <input className='detail-memo-button' type='button' value={"메모 추가"} onClick={handleAddMemo}/>
-          </div>
+            {
+              !view ?
+              <div className='schedule-add-container'>
+              
+                <input className='detail-add-button' type='button' value={"장소 추가"} onClick={handleAddDetailSchedule}/>
+                <input className='detail-memo-button' type='button' value={"메모 추가"} onClick={handleAddMemo}/>
+              </div>
+              :null
+            }
+            
         </div>
       </div>
     </div>
