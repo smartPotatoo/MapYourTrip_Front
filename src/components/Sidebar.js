@@ -24,12 +24,14 @@ const Sidebar = () => {
 
   return (
     <div className="sidebar-container">
-      <h2 className="logo-text">MapYourTrip</h2>
+      <Link to="/main">
+        <h2 className="logo-text">MapYourTrip</h2>
+      </Link>
       {!isLoggedIn ? (
         <>
           <div><Link to="/open-api/join" className="menu-item">Sign Up</Link></div>
           <div><Link to="/open-api/login" className="menu-item">Login</Link></div>
-          <div className="menu-item">Travel Plans</div>
+          <div><Link to="/main" className="menu-item">Travel Plans</Link></div>
           <div className="menu-item">Map</div>
         </>
       ) : (
