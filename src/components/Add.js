@@ -12,8 +12,11 @@ const Add = (props) => {
 
   useEffect(()=>{
     if(props.btn === false){
-        props.onOff(false);
+      // setTimeout(()=>{
+      //   props.onOff(false);
+      // },500)
     }
+    
   },[])
   return(
     <>
@@ -25,7 +28,9 @@ const Add = (props) => {
             <AddDetailSchedule click={click}/> //장소 추가
             :props.content === 'schedule' ?
              <AddSchedule type={props.type} scheduleId={props.scheduleId} click={click}/> // 일정 추가 || 일정 수정
-            : <AddMemo click={click}/> //메모 추가
+            : props.content==='confirm' ? 
+              <div className="confirm-text">시간이 겹쳐서 추가할 수 없습니다.</div>
+            :<AddMemo click={click}/> //메모 추가
           }
           
         </div>

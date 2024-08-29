@@ -3,13 +3,14 @@ import '../styles/DetailScheduleList.css';
 import ScheduleDateItem from './ScheduleDateItem'
 import MapYourTripContext from '../provider/MapYourTripContext';
 import { useLocation, useNavigate } from 'react-router-dom';
+import Add from './Add';
 import axios from 'axios';
 const DetailScheduleList = () => {
-  const {handleSetDetailScheduleInfo,handleSetView, detailScheduleInfo, scheduleId, scheduleTimeInfo, date, handleSetDateList,dateList,type, scheduleMemoinfo,handleSetScheduleMemoinfo} = useContext(MapYourTripContext);
+  const {handleSetDetailScheduleInfo,handleSetScheduleTimeInfo,handleSetView, detailScheduleInfo, scheduleId, scheduleTimeInfo, date, handleSetDateList,dateList,type, scheduleMemoinfo,handleSetScheduleMemoinfo} = useContext(MapYourTripContext);
   const navigate = useNavigate();
   const location = useLocation();
   const token = sessionStorage.getItem('token'); 
-  
+  const [confirmStart,setConfirmStart] = useState(false)
   const getSchedule = () =>{
     axios.get((`${process.env.REACT_APP_API_URL}/open-api/schedule/${scheduleId}/detail`))
     .then(res=>{
@@ -80,20 +81,44 @@ const DetailScheduleList = () => {
   },[detailScheduleInfo])
 
   useEffect(()=>{
+    console.log(scheduleTimeInfo)
     if(scheduleTimeInfo.length !== 0){
-      dateList.forEach((item)=>{
-        if(item.date === date){
-          item.times.push(scheduleTimeInfo)
-          
-          item.times.sort((a, b) => {
-            const timeA = a.startTime.split(':').map(Number);
-            const timeB = b.startTime.split(':').map(Number);
+      dateList.forEach((item) => {
+        if (item.date === date) {
+          //시간 겹침 방지
+          const isConflict = item.times.some(existingTime => {
+            const [existingStartHour, existingStartMinute] = existingTime.startTime.split(':').map(Number);
+            const [existingEndHour, existingEndMinute] = existingTime.endTime.split(':').map(Number);
+            const [newStartHour, newStartMinute] = scheduleTimeInfo.startTime.split(':').map(Number);
+            const [newEndHour, newEndMinute] = scheduleTimeInfo.endTime.split(':').map(Number);
   
-            return timeA[0] - timeB[0] || timeA[1] - timeB[1];
+            const existingStartTime = existingStartHour * 60 + existingStartMinute;
+            const existingEndTime = existingEndHour * 60 + existingEndMinute;
+            const newStartTime = newStartHour * 60 + newStartMinute;
+            const newEndTime = newEndHour * 60 + newEndMinute;
+  
+            return (
+              (newStartTime >= existingStartTime && newStartTime < existingEndTime) ||
+              (newEndTime > existingStartTime && newEndTime <= existingEndTime) ||
+              (newStartTime <= existingStartTime && newEndTime >= existingEndTime)
+            );
           });
+  
+          if (!isConflict) {
+            item.times.push(scheduleTimeInfo);
+            item.times.sort((a, b) => {
+              const timeA = a.startTime.split(':').map(Number);
+              const timeB = b.startTime.split(':').map(Number);
+              return timeA[0] - timeB[0] || timeA[1] - timeB[1];
+            });
+  
+            handleSetDateList([...dateList]);
+          } else {
+            handleSetScheduleTimeInfo([]);
+            setConfirmStart(true);
+          }
         }
-      })
-      handleSetDateList([...dateList])
+      });
     }
     
   },[scheduleTimeInfo])
@@ -111,6 +136,7 @@ const DetailScheduleList = () => {
 
   return (
     <div className="detail-schedule-list-container">
+      {confirmStart ? <Add btn={false} onOff={setConfirmStart} content={"confirm"} /> : null}
       { dateList && dateList.length > 0 ?
         dateList.map((item,index)=>(
           <ScheduleDateItem key={index} index={index} item={item}/>
