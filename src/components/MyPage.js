@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FaSave } from 'react-icons/fa'; 
+import { FaSave } from 'react-icons/fa';
 import editIcon from '../assets/icon_edit.svg';
 import defaultProfileImage from '../assets/icon_person.svg';
 import '../styles/MyPage.css';
@@ -42,15 +42,15 @@ const MyPage = () => {
             'Authorization': `Bearer ${token}`, // JWT 토큰을 헤더에 포함
           },
         });
-    
+
         const data = await response.json();
-        
+
         if (!response.ok) {
           console.error('응답 상태 코드:', response.status);
           console.error('응답 메시지:', data);
           throw new Error('서버에서 오류가 발생했습니다.');
         }
-    
+
         if (data.result.resultCode === 200) {
           setProfile({
             nickname: data.body.nickname,
@@ -69,44 +69,44 @@ const MyPage = () => {
   }, []);
 
   useEffect(() => {
-    if(profile && profile.filename){
+    if (profile && profile.filename) {
       getProfilePicture();
     }
   }, [profile])
 
-  const [file,setFile] = useState(null);
+  const [file, setFile] = useState(null);
 
   const handleProfileImageChange = (event) => {
     const fileInfo = event.target.files[0];
     setFile(event.target.files[0])
 
     const token = sessionStorage.getItem('token');
-      const formData = new FormData();
-  
-      // 닉네임 추가: undefined 체크
-      if (newNickname !== undefined) {
-        formData.append('data', new Blob([JSON.stringify({ nickname: newNickname })],{ type: 'application/json' }));
+    const formData = new FormData();
+
+    // 닉네임 추가: undefined 체크
+    if (newNickname !== undefined) {
+      formData.append('data', new Blob([JSON.stringify({ nickname: newNickname })], { type: 'application/json' }));
+    }
+    formData.append('file', fileInfo);
+
+    axios.patch(
+      `${process.env.REACT_APP_API_URL}/mypage`,
+      formData,
+      {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'multipart/form-data',
+        },
       }
-      formData.append('file', fileInfo);
-      
-      axios.patch(
-        `${process.env.REACT_APP_API_URL}/mypage`,
-        formData,
-        {
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'multipart/form-data',
-          },
-        }
-      ).then((res)=>{
-        console.log(res);
+    ).then((res) => {
+      console.log(res);
 
       // 프로필 사진이 성공적으로 업로드되면 새로운 Blob URL 생성
       const newProfileUrl = URL.createObjectURL(fileInfo);
       setProfilePicture(newProfileUrl);
-      }).catch(err=>{
-        console.log(err)
-      });
+    }).catch(err => {
+      console.log(err)
+    });
   };
 
   const handleEditNickname = () => {
@@ -116,39 +116,39 @@ const MyPage = () => {
 
   const handleSaveNickname = async () => {
     console.log("asdf")
-      const token = sessionStorage.getItem('token');
-      const formData = new FormData();
-  
-      // 닉네임 추가: undefined 체크
-      if (newNickname !== undefined) {
-        formData.append('data', new Blob([JSON.stringify({ nickname: newNickname })],{ type: 'application/json' }));
+    const token = sessionStorage.getItem('token');
+    const formData = new FormData();
+
+    // 닉네임 추가: undefined 체크
+    if (newNickname !== undefined) {
+      formData.append('data', new Blob([JSON.stringify({ nickname: newNickname })], { type: 'application/json' }));
+    }
+    formData.append('file', file);
+    // FormData 내용 출력
+    for (let [key, value] of formData.entries()) {
+      console.log(key, value); // FormData에 들어간 각 키-값 쌍을 출력
+    }
+    await axios.patch(
+      `${process.env.REACT_APP_API_URL}/mypage`,
+      formData,
+      {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'multipart/form-data',
+        },
       }
-      formData.append('file', file);
-      // FormData 내용 출력
-      for (let [key, value] of formData.entries()) { 
-        console.log(key, value); // FormData에 들어간 각 키-값 쌍을 출력
-      }
-      await axios.patch(
-        `${process.env.REACT_APP_API_URL}/mypage`,
-        formData,
-        {
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'multipart/form-data',
-          },
-        }
-      ).then((res)=>{
-        console.log(res)
-      }).catch(err=>{
-        console.log(err)
-      });
+    ).then((res) => {
+      console.log(res)
+    }).catch(err => {
+      console.log(err)
+    });
   };
 
 
-  const handleDeletePlan = (index,scheduleId) => {
-    axios.delete(`${process.env.REACT_APP_API_URL}/schedule/${scheduleId}`,{
-      headers:{
-        Authorization: `Bearer ${sessionStorage.getItem('token') }`
+  const handleDeletePlan = (index, scheduleId) => {
+    axios.delete(`${process.env.REACT_APP_API_URL}/schedule/${scheduleId}`, {
+      headers: {
+        Authorization: `Bearer ${sessionStorage.getItem('token')}`
       }
     }).then((res) => {
       setTravelPlans((prevPlans) => prevPlans.filter((_, i) => i !== index));
@@ -162,22 +162,22 @@ const MyPage = () => {
       {profile && (
         <div className="mypage-profile-section">
           <div className="mypage-profile-img-container">
-            <img 
+            <img
               src={profile.filename ? profilePicture : defaultProfileImage} // 프로필 사진이 없을 경우 기본 이미지 사용
-              className="mypage-profile-img" 
+              className="mypage-profile-img"
               alt="Profile"
             />
           </div>
           <div className="mypage-nickname-container">
             {isEditingNickname ? (
               <>
-                <input 
+                <input
                   type="text"
                   value={newNickname}
                   onChange={(e) => setNewNickname(e.target.value)}
                   className="mypage-edit-nickname-input"
                 />
-                <FaSave 
+                <FaSave
                   className="mypage-save-nickname-icon"
                   onClick={handleSaveNickname}
                 />
@@ -185,9 +185,9 @@ const MyPage = () => {
             ) : (
               <>
                 <h2 className="mypage-nickname">{profile.nickname}</h2>
-                <img 
-                  src={editIcon} 
-                  className="mypage-edit-nickname-icon" 
+                <img
+                  src={editIcon}
+                  className="mypage-edit-nickname-icon"
                   onClick={handleEditNickname}
                   alt="Edit"
                 />
@@ -200,7 +200,7 @@ const MyPage = () => {
             onChange={handleProfileImageChange}
             className="mypage-edit-profile-input"
           />
-          <button 
+          <button
             className="mypage-edit-profile-button"
             onClick={() => document.querySelector('.mypage-edit-profile-input').click()}
           >
@@ -210,12 +210,12 @@ const MyPage = () => {
       )}
 
       {/* 여행 계획 리스트 */}
-      
+
       <TravelPlansList
         travelPlans={travelPlans}
         onDeletePlan={handleDeletePlan}
       />
-     
+
     </div>
   );
 };
