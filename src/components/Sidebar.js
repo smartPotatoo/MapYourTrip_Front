@@ -39,7 +39,7 @@ const Sidebar = () => {
             <DetailScheduleList/>
             :
             <div className='login-sidebar-container'>
-              <div className="menu-item">Travel Plans</div>
+              <Link to="/main" className="menu-item">Travel Plans</Link>
               <div className="menu-item">Map</div>
             </div>
           }

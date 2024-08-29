@@ -3,51 +3,35 @@
     border-radius: 10px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    margin: 10px;
-    margin-top: 20px;
-    flex: 0 1 calc(50% - 40px); /* 기본적으로 한 줄에 두 개 배치 */
-    box-sizing: border-box; /* 패딩과 마진을 포함한 박스 크기 계산 */
-    position: relative; /* 닉네임을 절대 위치로 배치할 수 있도록 설정 */
-    text-align: center; /* 텍스트를 중앙 정렬 */
+    width: calc(50% - 40px); /* 한 줄에 두 개의 카드가 들어가도록 설정 */
+    box-sizing: border-box; /* 패딩과 마진을 포함하여 박스 크기를 계산 */
+    text-align: left; /* 텍스트를 왼쪽 정렬 */
     transition: background-color 0.3s ease;
-}
-
-@media (max-width: 768px) {
-    .schedule-card {
-        flex: 0 1 calc(100% - 40px); /* 화면이 좁아지면 한 줄에 하나 배치 */
-    }
-}
-
-.schedule-card:hover {
-    background-color: #e0f7fa;
+    cursor: pointer; /* 마우스 커서가 포인터로 변경 */
+    position: relative; /* 닉네임 위치 조정을 위한 상대 위치 */
+    margin-top: 40px;
+    margin-left: 30px;
 }
 
 .schedule-card h3 {
-    font-size: 1.2rem;
-    margin-bottom: 10px;
+    font-size: 1.2rem; /* 제목 크기 확대 */
+    font-weight: bold;
 }
 
 .schedule-card p {
     margin: 5px 0;
-    font-size: 1rem;
-}
-
-.schedule-title {
-    font-size: 1.2rem;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-.schedule-dates {
-    font-size: 0.9rem;
-    margin-bottom: 10px;
+    font-size: 1rem; /* 텍스트 크기 확대 */
     color: #333;
 }
 
 .schedule-nickname {
     position: absolute;
-    right: 10px;
     bottom: 10px;
-    font-size: 0.75rem; /* 작은 글씨 */
-    color: #777; /* 회색으로 표시 */
+    right: 10px;
+    font-size: 0.85rem;
+    color: #777;
+}
+
+.schedule-card:hover {
+    background-color: #e0f7fa;
 }
