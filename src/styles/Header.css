@@ -1,63 +1,38 @@
 .header-container {
-    background-color: #fff;
-    padding: 10px 20px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    width: calc(100% - 200px); /* 사이드바를 제외한 나머지 전체를 차지 */
-    height: 40px;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-    position: fixed;
-    left: 290px; /* 사이드바를 고려하여 위치 설정 */
-    z-index: 1000;
-  }
-  
-  .search-bar-container {
-    position: relative;
-    display: flex;
-    align-items: center;
-    width: 80vw;
-    justify-content: space-between;
-  }
-  
-  .search-bar {
-    width: 300px;
-    padding: 10px 40px 10px 20px;
-    border-radius: 20px;
-    border: 1px solid #ccc;
-    background-color: #f7f7f7;
-  }
-  
-  .search-button {
-    position: absolute;
-    left: 330px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-  }
-  
-  .search-button img {
-    width: 20px;
-    height: 20px;
-    object-fit: contain;
-  }
-  
-  .create-schedule-button{
-    all: unset;
-    border: 1px solid #333;
-    text-align: center;
-    width: 150px;
-    height: 38px;
-    border-radius: 15px;
-    font-weight: bold;
-    font-size: 1rem;
-    cursor: pointer;
-    background-color: #0d47a1;
-    color: white;
-    margin-right: 30px;
-  }
-  
-  .create-schedule-button:active{
-    opacity: .7;
-  }
+  background-color: #fff;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: flex-start; /* 왼쪽 정렬 */
+  align-items: center;
+  width: calc(100% - 200px); /* 사이드바를 제외한 나머지 전체를 차지 */
+  height: 40px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  left: 290px; /* 사이드바를 고려하여 위치 설정 */
+  z-index: 1000;
+}
+
+.search-bar-container {
+  display: flex; /* Flexbox로 설정 */
+  align-items: center;
+  width: 90%;
+}
+
+.create-schedule-button {
+  all: unset;
+  border: 1px solid #333;
+  text-align: center;
+  width: 150px;
+  height: 38px;
+  border-radius: 15px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  background-color: #0d47a1;
+  color: white;
+  margin-left: auto; /* 버튼을 오른쪽으로 밀어내기 */
+}
+
+.create-schedule-button:active {
+  opacity: 0.7;
+}
