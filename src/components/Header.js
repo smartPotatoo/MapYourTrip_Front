@@ -13,7 +13,7 @@ const Header = () => {
   }
   return (
     <div className="header-container">
-      {addScheduleStart ? <Add btn={true} onOff={setAddScheduleStart} content={"schedule"} /> : null}
+      {addScheduleStart ? <Add btn={true} onOff={setAddScheduleStart} type={"create"} content={"schedule"} /> : null}
       <div className="search-bar-container">
         { 
           type ===''?

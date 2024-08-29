@@ -20,7 +20,7 @@
   align-items: center;
   justify-content: space-around;
 }
-.add-schedule-button{
+.add-schedule-button-container .add-schedule-button{
   all: unset;
   border: 1px solid #333;
   text-align: center;
