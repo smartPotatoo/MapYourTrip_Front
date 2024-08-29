@@ -27,3 +27,9 @@
   top:2%;
   cursor: pointer;
 }
+.confirm-text{
+  margin: auto;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: red;
+}
