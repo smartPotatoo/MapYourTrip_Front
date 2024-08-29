@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState,useContext } from 'react';
 import { FaSave } from 'react-icons/fa'; // 저장 아이콘
 import editIcon from '../assets/icon_edit.svg'; // 수정 아이콘
 import TravelPlansList from './TravelPlansList';
 import '../styles/MyPage.css';
-
+import MapYourTripContext from '../provider/MapYourTripContext';
+import axios from 'axios';
 const MyPage = () => {
+  const {handleSetType} = useContext(MapYourTripContext);
   const [profile, setProfile] = useState(null);
   const [travelPlans, setTravelPlans] = useState([]);
   const [isEditingNickname, setIsEditingNickname] = useState(false);
@@ -55,7 +57,7 @@ const MyPage = () => {
       setProfile(mockProfile);
       setTravelPlans(mockTravelPlans);
     };
-
+    handleSetType('');
     fetchMyPageData();
   }, []);
 
@@ -86,8 +88,16 @@ const MyPage = () => {
     setIsEditingNickname(false);
   };
 
-  const handleDeletePlan = (index) => {
-    setTravelPlans((prevPlans) => prevPlans.filter((_, i) => i !== index));
+  const handleDeletePlan = (index,scheduleId) => {
+    axios.delete(`${process.env.REACT_APP_API_URL}/schedule/${scheduleId}`,{
+      headers:{
+        Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoibWluIiwic3ViIjoibWluIiwianRpIjoiNSIsInJvbGUiOiJST0xFX1VTRVIiLCJpYXQiOjE3MjQ4OTI0NTAsImV4cCI6MTcyNDk3ODg1MH0.z9hFJe1Y6q7SlWgV-lKUFHKxheiDwxv-klYyB887DjM`
+      }
+    }).then((res)=>{
+      setTravelPlans((prevPlans) => prevPlans.filter((_, i) => i !== index));
+    }).catch(err=>{
+      console.log(err);
+    })
   };
 
   return (

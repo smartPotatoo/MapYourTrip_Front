@@ -16,7 +16,7 @@ const TravelPlansList = ({ travelPlans, onDeletePlan }) => {
             <p>{plan.startDate} ~ {plan.endDate}</p>
             <button
               className="delete-plan-button"
-              onClick={() => onDeletePlan(index)}
+              onClick={() => onDeletePlan(index,plan.id)}
             >
               삭제
             </button>
