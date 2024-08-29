@@ -1,4 +1,5 @@
-import { React, useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom'; // useLocation 훅을 임포트하여 현재 경로를 확인
 import '../styles/Header.css';
 import searchIcon from '../assets/Search.svg';
 import MapYourTripContext from '../provider/MapYourTripContext';
@@ -9,6 +10,7 @@ const Header = () => {
   const { type } = useContext(MapYourTripContext);
   const [addScheduleStart, setAddScheduleStart] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const location = useLocation(); // 현재 경로를 가져옴
 
   useEffect(() => {
     // sessionStorage에서 토큰 확인
@@ -19,6 +21,12 @@ const Header = () => {
   const handleAddDetailSchedule = () => {
     setAddScheduleStart(true);
   };
+
+  // 현재 경로에 따라 버튼의 value를 설정
+  const buttonValue =
+    location.pathname === '/main' || location.pathname === '/' || location.pathname === '/mypage'
+      ? 'New Plans'
+      : 'completion';
 
   return (
     <div className="header-container">
@@ -32,7 +40,7 @@ const Header = () => {
                 <img src={searchIcon} alt="Search" />
               </button>
               {isLoggedIn && ( // 로그인한 상태에서만 버튼을 표시
-                <input type='button' className='create-schedule-button' value={'completion'} onClick={handleAddDetailSchedule} />
+                <input type='button' className='create-schedule-button' value={buttonValue} onClick={handleAddDetailSchedule} />
               )}
             </>
           ) : (
