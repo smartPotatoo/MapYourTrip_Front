@@ -2,12 +2,13 @@ import React, { useEffect, useContext, useState } from 'react';
 import '../styles/DetailScheduleList.css';
 import ScheduleDateItem from './ScheduleDateItem'
 import MapYourTripContext from '../provider/MapYourTripContext';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 const DetailScheduleList = () => {
   const {handleSetDetailScheduleInfo,handleSetView,handleSetType, detailScheduleInfo, scheduleId, scheduleTimeInfo, date, handleSetDateList,dateList,type, scheduleMemoinfo,handleSetScheduleMemoinfo} = useContext(MapYourTripContext);
-  
   const navigate = useNavigate();
+  const location = useLocation();
+  const token = location.state?.token;
   
   const getSchedule = () =>{
     axios.get((`${process.env.REACT_APP_API_URL}/open-api/schedule/${scheduleId}/detail`))
@@ -27,9 +28,9 @@ const DetailScheduleList = () => {
     if(type === 'create' || type === 'modify'){
       handleSetView(false);
       if(detailScheduleInfo.nickname != undefined){
-        axios.get(`http://localhost:8081/mypage`,{
+        axios.get(`${process.env.REACT_APP_API_URL}/mypage`,{
           headers: {
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiMSIsInN1YiI6IjEiLCJqdGkiOiIxIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTcyNDgzNzY0MCwiZXhwIjoxNzI0OTI0MDQwfQ.L0e1FsrZX-q3WhXcMXUB4mxUPOYVLhHqRPUL2rbJNgQ`
+            Authorization: `Bearer ${token}`
           }
         })
         .then(res=>{
