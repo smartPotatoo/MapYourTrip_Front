@@ -55,6 +55,7 @@
     cursor: pointer;
     background-color: #0d47a1;
     color: white;
+    margin-right: 20px;
   }
   
   .create-schedule-button:active{
