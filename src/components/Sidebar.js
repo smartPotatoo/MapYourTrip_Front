@@ -1,11 +1,13 @@
-import  { React,useEffect, useState } from 'react';
+import  { React,useEffect, useState,useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import '../styles/Sidebar.css';
 import DetailScheduleList from './DetailScheduleList';
+import MapYourTripContext from '../provider/MapYourTripContext';
 
 const Sidebar = () => {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const {type} = useContext(MapYourTripContext);
 
   useEffect(() => {
     // sessionStorage에서 토큰 확인
@@ -32,7 +34,15 @@ const Sidebar = () => {
         </>
       ) : (
         <>
-          <DetailScheduleList />
+          {
+            type ==='create' || type === 'view' || type === 'modify' ? 
+            <DetailScheduleList/>
+            :
+            <div className='login-sidebar-container'>
+              <div className="menu-item">Travel Plans</div>
+              <div className="menu-item">Map</div>
+            </div>
+          }
           <div className="profile-logout-container">
             <Link to="/mypage" className="menu-item small-button">Profile</Link>
             <div className="menu-item small-button logout-button" onClick={handleLogout}>Sign Out</div>

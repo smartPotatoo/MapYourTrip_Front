@@ -13,14 +13,14 @@ const AddSchedule = (props) => {
   });
 
   const [confirm, setConfirm] = useState(true);
-
+  const token = sessionStorage.getItem('token'); 
   
   const click = () =>{
     axios.post(`${process.env.REACT_APP_API_URL}/schedule`,
       scheudleInfo,{
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoibWluIiwic3ViIjoibWluIiwianRpIjoiNSIsInJvbGUiOiJST0xFX1VTRVIiLCJpYXQiOjE3MjQ4OTI0NTAsImV4cCI6MTcyNDk3ODg1MH0.z9hFJe1Y6q7SlWgV-lKUFHKxheiDwxv-klYyB887DjM`
+        Authorization: `Bearer ${token}`
       }
     })
     .then(res=>{
