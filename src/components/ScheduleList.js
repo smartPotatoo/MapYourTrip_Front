@@ -3,7 +3,6 @@ import axios from "axios";
 import { useLocation } from "react-router-dom";
 import '../styles/ScheduleList.css'
 import ScheduleItem from "./ScheduleItem";
-import MapYourTripContext from "../provider/MapYourTripContext";
 
 export default function ScheduleList() {
     const location = useLocation();
