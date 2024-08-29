@@ -16,11 +16,11 @@ const AddSchedule = (props) => {
 
   
   const click = () =>{
-    axios.post(`http://localhost:8081/schedule`,
+    axios.post(`${process.env.REACT_APP_API_URL}/schedule`,
       scheudleInfo,{
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiMSIsInN1YiI6IjEiLCJqdGkiOiIxIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTcyNDgzNzY0MCwiZXhwIjoxNzI0OTI0MDQwfQ.L0e1FsrZX-q3WhXcMXUB4mxUPOYVLhHqRPUL2rbJNgQ`
+        Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoibWluIiwic3ViIjoibWluIiwianRpIjoiNSIsInJvbGUiOiJST0xFX1VTRVIiLCJpYXQiOjE3MjQ4OTI0NTAsImV4cCI6MTcyNDk3ODg1MH0.z9hFJe1Y6q7SlWgV-lKUFHKxheiDwxv-klYyB887DjM`
       }
     })
     .then(res=>{
