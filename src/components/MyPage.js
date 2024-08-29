@@ -11,6 +11,25 @@ const MyPage = () => {
   const [travelPlans, setTravelPlans] = useState([]);
   const [isEditingNickname, setIsEditingNickname] = useState(false);
   const [newNickname, setNewNickname] = useState('');
+  const [profilePicture, setProfilePicture] = useState(null);
+
+  const getProfilePicture = () => {
+    const token = sessionStorage.getItem('token');
+    axios({
+      url: `${process.env.REACT_APP_API_URL}/mypage/picture`,
+      method: 'GET',
+      responseType: 'blob',
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+      .then(res => {
+        console.log(res);
+        const url = URL.createObjectURL(res.data);
+        setProfilePicture(url);
+      })
+      .catch(err => console.log(err));
+  };
 
   useEffect(() => {
     const fetchMyPageData = async () => {
@@ -35,7 +54,7 @@ const MyPage = () => {
         if (data.result.resultCode === 200) {
           setProfile({
             nickname: data.body.nickname,
-            filePath: data.body.userpicture ? data.body.userpicture.filePath : null,
+            filename: data.body.userpicture ? data.body.userpicture.originalFilename : null,
           });
           setNewNickname(data.body.nickname);
           setTravelPlans(data.body.scheduleInfoResponse);
@@ -49,13 +68,17 @@ const MyPage = () => {
     fetchMyPageData();
   }, []);
 
-  const [file,setFile] = useState(null);
+  useEffect(() => {
+    if(profile && profile.filename){
+      getProfilePicture();
+    }
+  }, [profile])
 
+  const [file,setFile] = useState(null);
 
   const handleProfileImageChange = (event) => {
     const fileInfo = event.target.files[0];
     setFile(event.target.files[0])
-    console.log(event.target.files[0])
 
     const token = sessionStorage.getItem('token');
       const formData = new FormData();
@@ -65,10 +88,7 @@ const MyPage = () => {
         formData.append('data', new Blob([JSON.stringify({ nickname: newNickname })],{ type: 'application/json' }));
       }
       formData.append('file', fileInfo);
-      // FormData 내용 출력
-      for (let [key, value] of formData.entries()) { 
-        console.log(key, value); // FormData에 들어간 각 키-값 쌍을 출력
-      }
+      
       axios.patch(
         `${process.env.REACT_APP_API_URL}/mypage`,
         formData,
@@ -79,23 +99,14 @@ const MyPage = () => {
           },
         }
       ).then((res)=>{
-        console.log(res)
+        console.log(res);
+
+      // 프로필 사진이 성공적으로 업로드되면 새로운 Blob URL 생성
+      const newProfileUrl = URL.createObjectURL(fileInfo);
+      setProfilePicture(newProfileUrl);
       }).catch(err=>{
         console.log(err)
       });
-
-
-
-    if (fileInfo) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setProfile((prevProfile) => ({
-          ...prevProfile,
-          filePath: reader.result,
-        }));
-      };
-      reader.readAsDataURL(fileInfo);
-    }
   };
 
   const handleEditNickname = () => {
@@ -152,7 +163,7 @@ const MyPage = () => {
         <div className="mypage-profile-section">
           <div className="mypage-profile-img-container">
             <img 
-              src={profile.filePath || defaultProfileImage} // 프로필 사진이 없을 경우 기본 이미지 사용
+              src={profile.filename ? profilePicture : defaultProfileImage} // 프로필 사진이 없을 경우 기본 이미지 사용
               className="mypage-profile-img" 
               alt="Profile"
             />
