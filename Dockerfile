@@ -17,6 +17,16 @@ RUN npm install
 # add app
 COPY . /app
 
+# build arguments for env variables
+ARG REACT_APP_NAVER_MAP_CLIENT_ID
+# set environment variables
+ENV REACT_APP_NAVER_MAP_CLIENT_ID=$REACT_APP_NAVER_MAP_CLIENT_ID
+
+# build arguments for env variables
+ARG REACT_APP_NAVER_MAP_API_KEY
+# set environment variables
+ENV REACT_APP_NAVER_MAP_API_KEY=$REACT_APP_NAVER_MAP_API_KEY
+
 # build app
 RUN npm run build
 
