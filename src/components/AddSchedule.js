@@ -42,7 +42,7 @@ const AddSchedule = (props) => {
       }
     })
     .then(res=>{
-      navigate(`/schedule/create/${res.data.body.id}`);
+      navigate(`/schedule/modify/${props.scheduleId}`);
     }).catch(err=>{
       console.log(err);
     })
