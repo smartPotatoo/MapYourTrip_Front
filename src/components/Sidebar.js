@@ -24,7 +24,7 @@ const Sidebar = () => {
 
   return (
     <div className="sidebar-container">
-      <Link to="/main">
+      <Link to="/main" style={{ textDecoration: 'none' ,color: 'inherit'}}>
         <h2 className="logo-text">MapYourTrip</h2>
       </Link>
       {!isLoggedIn && !type ? (
