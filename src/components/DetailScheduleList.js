@@ -5,10 +5,10 @@ import MapYourTripContext from '../provider/MapYourTripContext';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 const DetailScheduleList = () => {
-  const {handleSetDetailScheduleInfo,handleSetView,handleSetType, detailScheduleInfo, scheduleId, scheduleTimeInfo, date, handleSetDateList,dateList,type, scheduleMemoinfo,handleSetScheduleMemoinfo} = useContext(MapYourTripContext);
+  const {handleSetDetailScheduleInfo,handleSetView, detailScheduleInfo, scheduleId, scheduleTimeInfo, date, handleSetDateList,dateList,type, scheduleMemoinfo,handleSetScheduleMemoinfo} = useContext(MapYourTripContext);
   const navigate = useNavigate();
   const location = useLocation();
-  const token = location.state?.token;
+  const token = sessionStorage.getItem('token'); 
   
   const getSchedule = () =>{
     axios.get((`${process.env.REACT_APP_API_URL}/open-api/schedule/${scheduleId}/detail`))
@@ -21,7 +21,7 @@ const DetailScheduleList = () => {
     }
   useEffect(()=>{
     getSchedule();
-  },[])
+  },[scheduleId])
 
 
   useEffect(()=>{
@@ -35,7 +35,6 @@ const DetailScheduleList = () => {
         })
         .then(res=>{
           if(res.data.body.nickname !== detailScheduleInfo.nickname){
-            handleSetType('');
             navigate('/mypage')
             
           }
@@ -47,7 +46,6 @@ const DetailScheduleList = () => {
     }else if(type === 'view'){
       handleSetView(true);
     }else{
-      handleSetType('');
       navigate('/mypage')
     }
     
@@ -58,7 +56,7 @@ const DetailScheduleList = () => {
   useEffect(()=>{
     let startDate = detailScheduleInfo.startDate;
     let endDate = detailScheduleInfo.endDate
-    if(detailScheduleInfo && detailScheduleInfo.length !== 0 && type === 'create'){
+    if(detailScheduleInfo && detailScheduleInfo.length !== 0 && detailScheduleInfo.schedulesDateList.length === 0){
       //시작날짜와 종료날짜에 따른 일일 날짜 리스트 생성
       const start = new Date(`20${startDate.slice(0, 2)}-${startDate.slice(2, 4)}-${startDate.slice(4, 6)}`);
       const end = new Date(`20${endDate.slice(0, 2)}-${endDate.slice(2, 4)}-${endDate.slice(4, 6)}`);

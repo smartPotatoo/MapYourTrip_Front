@@ -7,13 +7,21 @@ import Signup from './Signup';
 import MyPage from './MyPage';
 import WrappedMap from './Map';
 import ScheduleList from './ScheduleList';
-
+import { useContext, useEffect } from 'react';
+import MapYourTripContext from '../provider/MapYourTripContext';
 
 const AppContent = () => {
   const location = useLocation();
+  const {handleSetType} = useContext(MapYourTripContext);
   const isLoginPage = location.pathname === '/open-api/login';
   const isSignupPage = location.pathname === '/open-api/join';
   const isMyPage = location.pathname === '/mypage';
+
+  useEffect(()=>{
+    if(!location.pathname.includes('/schedule')){
+      handleSetType('')
+    }
+  },[location])
   
   const isAuthPage = isLoginPage || isSignupPage; // 인증 관련 페이지인지 확인
 
