@@ -15,7 +15,6 @@ const Add = (props) => {
         props.onOff(false);
     }
   },[])
-
   return(
     <>
       <div className="confirm-bg">
@@ -25,7 +24,7 @@ const Add = (props) => {
             props.content === 'date' ? 
             <AddDetailSchedule click={click}/> //장소 추가
             :props.content === 'schedule' ?
-            <AddSchedule click={click}/> // 일정 추가
+             <AddSchedule type={props.type} scheduleId={props.scheduleId} click={click}/> // 일정 추가 || 일정 수정
             : <AddMemo click={click}/> //메모 추가
           }
           
