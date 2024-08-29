@@ -16,6 +16,7 @@ const TravelPlanItem = ({ plan, onDeletePlan,index }) => {
         <h4>{plan.tripName}</h4>
         <img src={editIcon} className="edit-plan-icon" onClick={()=>{handleSetModifyScheduleStart()}}/>
       </div>
+      <h4>여행지 : {plan.address}</h4>
       <p>{plan.startDate} ~ {plan.endDate}</p>
       <button
         className="delete-plan-button"
