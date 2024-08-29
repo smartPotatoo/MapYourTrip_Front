@@ -1,1 +1,43 @@
+name: Create image
 
+on:
+  push:
+    branches: [ "develop_kdh" ]
+  pull_request:
+    branches: [ "develop_kdh" ]
+  workflow_dispatch:
+
+env:
+  DOCKER_IMAGE: mapyourtrip
+  DOCKER_TAG: client0.1
+  REACT_APP_NAVER_MAP_CLIENT_ID: ${{ secrets.REACT_APP_NAVER_MAP_CLIENT_ID }}
+  REACT_APP_NAVER_MAP_API_KEY: ${{ secrets.REACT_APP_NAVER_MAP_API_KEY }}
+jobs:
+  Docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: setup git config
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "<>"
+
+      - name: Dependecies
+        run: npm ci
+
+      - name: Build
+        run: CI=false npm run build
+
+      - name: Login to DockerHub Registry
+        run: echo ${{ secrets.DOCKER_PASSWORD_KDH }} | docker login -u ${{ secrets.DOCKER_USERNAME_KDH }} --password-stdin
+
+      - name: Build Docker image
+        run: docker build . --build-arg REACT_APP_NAVER_MAP_CLIENT_ID=$REACT_APP_NAVER_MAP_CLIENT_ID --build-arg REACT_APP_NAVER_MAP_API_KEY=$REACT_APP_NAVER_MAP_API_KEY --file Dockerfile --tag ${{ secrets.DOCKER_USERNAME_KDH }}/$DOCKER_IMAGE:$DOCKER_TAG
+
+      - name: Push to Docker Hub
+        run: docker push ${{ secrets.DOCKER_USERNAME_KDH }}/$DOCKER_IMAGE:$DOCKER_TAG

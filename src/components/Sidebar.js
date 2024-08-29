@@ -27,7 +27,7 @@ const Sidebar = () => {
       <Link to="/main" style={{ textDecoration: 'none' ,color: 'inherit'}}>
         <h2 className="logo-text">MapYourTrip</h2>
       </Link>
-      {!isLoggedIn ? (
+      {!isLoggedIn && !type ? (
         <>
           <div><Link to="/open-api/join" className="menu-item">Sign Up</Link></div>
           <div><Link to="/open-api/login" className="menu-item">Login</Link></div>
