@@ -9,8 +9,11 @@ export default function ScheduleList() {
     const location = useLocation();
     const [schedules, setSchedules] = useState([]);
     const token = location.state?.token;
+<<<<<<< HEAD
     const {handleSetType} = useContext(MapYourTripContext);
     console.log(token);
+=======
+>>>>>>> 16a7f7a2a2983b924929006617ed07c0b477cc22
 
     useEffect(() => {
         const fetchSchedules = async () => {
@@ -32,7 +35,6 @@ export default function ScheduleList() {
 
     }, [token]);
 
-    handleSetType('');
 
     return (
         <div className="schedule-list">

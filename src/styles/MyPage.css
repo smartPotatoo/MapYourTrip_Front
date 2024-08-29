@@ -25,8 +25,8 @@
 }
 
 .mypage-profile-img {
-  width: 100%; /* 컨테이너를 꽉 채우도록 설정 */
-  height: 100%; /* 컨테이너를 꽉 채우도록 설정 */
+  width: 100px; /* 컨테이너를 꽉 채우도록 설정 */
+  height: 70%; /* 컨테이너를 꽉 채우도록 설정 */
   object-fit: cover; /* 이미지가 컨테이너를 꽉 채우도록 설정 */
   border-radius: 50%; /* 이미지도 원형으로 만들기 */
   display: block;

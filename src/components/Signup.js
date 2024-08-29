@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../styles/Signup.css'; // CSS 파일을 불러옵니다.
+import axios from 'axios';
+import '../styles/Signup.css';
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -9,16 +10,11 @@ const Signup = () => {
   const [usernameError, setUsernameError] = useState('');
 
   const [nickname, setNickname] = useState('');
-  const [nicknameStatus, setNicknameStatus] = useState('');
 
   const [password, setPassword] = useState('');
   const [passwordError, setPasswordError] = useState('');
 
-  // 닉네임 중복 검사용 가상 API 요청 함수 (실제 API를 사용하도록 수정 예정)
-  const checkNicknameAvailability = async (nickname) => {
-    const takenNicknames = ['takenNickname1', 'takenNickname2']; // Mock데이터 : 이미 사용 중인 닉네임들 (삭제 예정)
-    return !takenNicknames.includes(nickname);
-  };
+  const API_URL = process.env.REACT_APP_API_URL;
 
   const validateUsername = (value) => {
     const regex = /^[a-zA-Z0-9]+$/;
@@ -40,22 +36,25 @@ const Signup = () => {
     }
   };
 
-  const handleNicknameChange = async (value) => {
-    setNickname(value);
-    if (value.length > 0) {
-      const isAvailable = await checkNicknameAvailability(value);
-      setNicknameStatus(isAvailable ? '사용 가능한 닉네임입니다.' : '사용할 수 없는 닉네임입니다.');
-    } else {
-      setNicknameStatus('');
-    }
-  };
-
-  const handleSignup = (e) => {
+  const handleSignup = async (e) => {
     e.preventDefault();
 
-    if (!usernameError && !passwordError && nicknameStatus === '사용 가능한 닉네임입니다.') {
-      // 회원가입 성공 시
-      navigate('/open-api/login'); // 로그인 페이지로 이동
+    if (!usernameError && !passwordError) {
+      try {
+        // 백엔드로 회원가입 데이터를 전송
+        const response = await axios.post(`${API_URL}/open-api/join`, {
+          username,
+          nickname,
+          password,
+        });
+
+        if (response.status === 200) {
+          // 회원가입 성공 시 로그인 페이지로 이동
+          navigate('/open-api/login');
+        }
+      } catch (error) {
+        console.error('회원가입 중 오류 발생:', error);
+      }
     }
   };
 
@@ -84,13 +83,8 @@ const Signup = () => {
             id="nickname"
             placeholder="닉네임을 입력해주세요"
             value={nickname}
-            onChange={(e) => handleNicknameChange(e.target.value)}
+            onChange={(e) => setNickname(e.target.value)}
           />
-          {nicknameStatus && (
-            <small className={nicknameStatus === '사용 가능한 닉네임입니다.' ? 'success-text' : 'error-text'}>
-              {nicknameStatus}
-            </small>
-          )}
         </div>
         <div className="input-group">
           <label htmlFor="password">비밀번호</label>

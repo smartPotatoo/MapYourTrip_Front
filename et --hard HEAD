@@ -1,0 +1,259 @@
+[33mcommit d47c772b917c6c25f74f2ede988026b3d31fd749[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mfeature/authentication[m[33m, [m[1;31morigin/feature/authentication[m[33m)[m
+Merge: 8d644a2 d4ac8a3
+Author: jieun <jangji0513@naver.com>
+Date:   Thu Aug 29 11:10:43 2024 +0900
+
+    [MERGE] : Resolved merge conflicts
+
+[33mcommit d4ac8a3e10acbbcefee53e69a3437a7c070880b7[m[33m ([m[1;31morigin/main[m[33m, [m[1;32mmain[m[33m)[m
+Merge: 5f389b4 347a1cf
+Author: 민석 <47300870+seok019283501@users.noreply.github.com>
+Date:   Thu Aug 29 10:14:54 2024 +0900
+
+    Merge pull request #19 from smartPotatoo/feature/deleteSchedule
+    
+    feat: delete schedule
+
+[33mcommit 347a1cf7f84ccc44fa04c8a4b56bda00083be662[m
+Author: 민석 <47300870+seok019283501@users.noreply.github.com>
+Date:   Thu Aug 29 10:14:12 2024 +0900
+
+    feat: delete schedule
+
+[33mcommit 5f389b482fc001651fae773459ffa1dbb2fce1f5[m
+Merge: fe276f4 e91f7fd
+Author: Daviswhistle <bluesun4788@gmail.com>
+Date:   Thu Aug 29 09:53:20 2024 +0900
+
+    Merge pull request #18 from smartPotatoo/develop_kdh
+    
+    type 수정
+
+[33mcommit e91f7fd9cd986e957ecf7a9657d9ac1faf976cba[m
+Author: Daviswhistle <46082741+Daviswhistle@users.noreply.github.com>
+Date:   Thu Aug 29 09:52:32 2024 +0900
+
+    type 수정
+
+[33mcommit 8d644a2fc671c94ca1e84412ce41143209e7ddfb[m
+Author: jieun <jangji0513@naver.com>
+Date:   Thu Aug 29 09:51:23 2024 +0900
+
+    [ADD] : Mypage API add
+
+[33mcommit fe276f4ad0b7fd04a164cda50bdaff381bb7f9d3[m
+Merge: 48de0dd 794c04e
+Author: Daviswhistle <bluesun4788@gmail.com>
+Date:   Thu Aug 29 09:11:36 2024 +0900
+
+    Merge pull request #17 from smartPotatoo/develop_kdh
+    
+    token 반영
+
+[33mcommit 794c04e9b789f31f99a9c4a454cb7713c519ecba[m
+Author: Daviswhistle <46082741+Daviswhistle@users.noreply.github.com>
+Date:   Thu Aug 29 09:10:43 2024 +0900
+
+    token 반영
+
+[33mcommit 48de0ddb81e99d6da4327b2fe733def830da8df0[m
+Merge: d038b90 107eeb4
+Author: Daviswhistle <bluesun4788@gmail.com>
+Date:   Thu Aug 29 08:59:18 2024 +0900
+
+    Merge pull request #16 from smartPotatoo/develop_kdh
+    
+    token 유무에 따른 detailscheduleList 접근 차별화
+
+[33mcommit 107eeb4b981d9ecd4442688dc71a453c51e8930d[m
+Author: Daviswhistle <46082741+Daviswhistle@users.noreply.github.com>
+Date:   Thu Aug 29 08:58:25 2024 +0900
+
+    token 유무에 따른 detailscheduleList 접근 차별화
+
+[33mcommit d038b9000c8c7beab530600d2c25bdd7443bc74b[m
+Merge: 3c2f731 6cdb3a2
+Author: Daviswhistle <bluesun4788@gmail.com>
+Date:   Thu Aug 29 08:51:33 2024 +0900
+
+    Merge pull request #15 from smartPotatoo/develop_kdh
+    
+    /main 페이지 추가
+
+[33mcommit 6cdb3a2559f6182a74957e4a3c0be4d650e6d58e[m
+Author: Daviswhistle <46082741+Daviswhistle@users.noreply.github.com>
+Date:   Thu Aug 29 08:50:02 2024 +0900
+
+    D:/Git/main 페이지 추가
+
+[33mcommit ed8f9295ca7261ac0c2d7c060a0d31811f185cfc[m
+Author: Daviswhistle <46082741+Daviswhistle@users.noreply.github.com>
+Date:   Thu Aug 29 07:27:09 2024 +0900
+
+    pulled main
+
+[33mcommit 28c88726076308c2d83401727e3f8f3a7017bd3a[m
+Author: jieun <jangji0513@naver.com>
+Date:   Thu Aug 29 03:36:36 2024 +0900
+
+    [MOD] : sidebar sessionStorage 변경
+
+[33mcommit c215edf121a6bf39eaca8685dbac5f0d3d956871[m
+Author: jieun <jangji0513@naver.com>
+Date:   Thu Aug 29 03:29:52 2024 +0900
+
+    [MOD] : 로그인 sessionStorage 변경
+
+[33mcommit 3c2f7313d69909410e6e9ef0301559abc4861810[m
+Merge: 93c61cd 6bb1db6
+Author: 민석 <47300870+seok019283501@users.noreply.github.com>
+Date:   Thu Aug 29 00:46:29 2024 +0900
+
+    Merge pull request #14 from smartPotatoo/feature/addSchedule
+    
+    Feature/add schedule
+
+[33mcommit 6bb1db661cbdf83173fcc3c7f1aaef213aeb4e17[m
+Author: 민석 <47300870+seok019283501@users.noreply.github.com>
+Date:   Thu Aug 29 00:43:00 2024 +0900
+
+    console 삭제
+
+[33mcommit 15122dbf7b6f19488f47160f251fd4258f9b6852[m
+Author: 민석 <47300870+seok019283501@users.noreply.github.com>
+Date:   Thu Aug 29 00:37:29 2024 +0900
+
+    feat: 일정 추가 기능 구현
+
+[33mcommit 93c61cdd9549cf03d1d84158a1231c40df64d2e3[m
+Merge: c292bf9 9247cd6
+Author: 민석 <47300870+seok019283501@users.noreply.github.com>
+Date:   Wed Aug 28 23:23:52 2024 +0900
+
+    Merge pull request #13 from smartPotatoo/feature/markerInfo
+    
+    feat: add marker info view
+
+[33mcommit 9247cd609616018ccea4f65dd83259862b7f6ec7[m
+Author: 민석 <47300870+seok019283501@users.noreply.github.com>
+Date:   Wed Aug 28 23:22:36 2024 +0900
+
+    feat: add marker info view
+
+[33mcommit c292bf9ed1cf74d874bc409849a8a93fbb6d3e46[m
+Merge: b64cd60 ec9d466
+Author: 민석 <47300870+seok019283501@users.noreply.github.com>
+Date:   Wed Aug 28 17:24:59 2024 +0900
+
+    Merge pull request #12 from smartPotatoo/feature/axios
+    
+    error: axios header 수정
+
+[33mcommit ec9d466921d2e6cbbb4318bb99d696d6a40404b7[m
+Author: 민석 <47300870+seok019283501@users.noreply.github.com>
+Date:   Wed Aug 28 17:23:42 2024 +0900
+
+    error: axios header 수정
+
+[33mcommit b64cd60ee19827cc83019c5fa8644b3085fe9862[m
+Merge: a14b5f1 c96db21
+Author: 민석 <47300870+seok019283501@users.noreply.github.com>
+Date:   Wed Aug 28 16:35:49 2024 +0900
+
+    Merge pull request #11 from smartPotatoo/feature/scheduleView
+    
+    feature: schedule view add
+
+[33mcommit c96db21fb47055abd250496b809308b5c8a15141[m
+Author: 민석 <47300870+seok019283501@users.noreply.github.com>
+Date:   Wed Aug 28 16:35:06 2024 +0900
+
+    feature: schedule view add
+
+[33mcommit c6949932df834ebc4436863dabde11e01d560902[m
+Author: jieun <jangji0513@naver.com>
+Date:   Wed Aug 28 16:27:24 2024 +0900
+
+    [D] : Profile, Sign Out 버튼 사이드바 추가
+
+[33mcommit a283a2b65b27c5730680d3190cd0b633e248e8cc[m
+Author: jieun <jangji0513@naver.com>
+Date:   Wed Aug 28 16:18:55 2024 +0900
+
+    [MOD] : 사용자의 로그인 상태를 나타내기 위해 type을 설정
+
+[33mcommit 0c41eb1cb28e70e81d3932e0a302a1cde306f20d[m
+Author: jieun <jangji0513@naver.com>
+Date:   Wed Aug 28 15:43:00 2024 +0900
+
+    [MOD] : 회원가입 후 자동로그인 수정
+
+[33mcommit a18398056273dadfcbd43c1862f20e92f6b33caa[m
+Author: jieun <jangji0513@naver.com>
+Date:   Wed Aug 28 15:37:36 2024 +0900
+
+    [ADD] : JWT 토큰 설정
+
+[33mcommit a14b5f136f63b74965b7669be800329e867406ba[m
+Merge: ad3be06 d37ac32
+Author: 민석 <47300870+seok019283501@users.noreply.github.com>
+Date:   Wed Aug 28 15:08:57 2024 +0900
+
+    Merge pull request #10 from smartPotatoo/feature/addMemo
+    
+    feat: add memo info
+
+[33mcommit d37ac3225b0c85ddd34ffaea143d11590778977f[m
+Author: 민석 <47300870+seok019283501@users.noreply.github.com>
+Date:   Wed Aug 28 14:59:41 2024 +0900
+
+    feat: add memo info
+
+[33mcommit f224098fb2db44d95519548a900bd647636c101d[m
+Author: jieun <jangji0513@naver.com>
+Date:   Wed Aug 28 14:42:48 2024 +0900
+
+    [ADD] : 로그인 컴포넌트 백엔드 API 연동
+
+[33mcommit 57d09e1ee4a4ddae66d4a891e64062c078ea7483[m
+Author: jieun <jangji0513@naver.com>
+Date:   Wed Aug 28 14:30:03 2024 +0900
+
+    [ADD] : 회원가입 컴포넌트 백엔드 API 연동
+
+[33mcommit ad3be06d19780d7ee3edf85370b67e19cfc5feef[m
+Merge: f50218d 2351363
+Author: 민석 <47300870+seok019283501@users.noreply.github.com>
+Date:   Wed Aug 28 14:06:29 2024 +0900
+
+    Merge pull request #9 from smartPotatoo/feature/addMapMarker
+    
+    Feature/add map marker
+
+[33mcommit 2351363741f26258eb1e42f2f8baf911b4125ec6[m
+Author: 민석 <47300870+seok019283501@users.noreply.github.com>
+Date:   Wed Aug 28 14:05:44 2024 +0900
+
+    feat: add  update schedule
+
+[33mcommit 708ea93c6cd75c59bdb857a273582167b0a64f93[m
+Author: jieun <jangji0513@naver.com>
+Date:   Wed Aug 28 14:03:42 2024 +0900
+
+    [ADD] : axios 설치
+
+[33mcommit fb192ecac5b10ce6c4db6c761c1cedf490fe5ab8[m
+Merge: 2be97da f50218d
+Author: jieun <jangji0513@naver.com>
+Date:   Wed Aug 28 14:00:24 2024 +0900
+
+    [MERGE] : Resolved merge conflict
+
+[33mcommit fe5ff54cb7f9b5c7f4d5b0c147376dc3db55ec38[m
+Author: 민석 <47300870+seok019283501@users.noreply.github.com>
+Date:   Wed Aug 28 13:18:20 2024 +0900
+
+    feat: add map marker
+
+[33mcommit 6f1bcfb90743e0c40a49aef1e5cb37ce29631f6d[m
+Author: 민석 <47300870+seok019283501@users.no

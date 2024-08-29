@@ -5,8 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 const AddScheduleTitle = (props) => {
   const navigate = useNavigate();
-  const {detailScheduleInfo,dateList,view,scheduleId,type,handleSetType} = useContext(MapYourTripContext);
-
+  const {detailScheduleInfo,dateList,view,scheduleId,type} = useContext(MapYourTripContext);
+  const token = sessionStorage.getItem('token'); 
   const click = () =>{
     if(!view){
       if(type === 'create'){
@@ -19,15 +19,14 @@ const AddScheduleTitle = (props) => {
   }
 
   const add = () =>{
-    axios.post(`http://localhost:8081/schedule/${scheduleId}/detail`,{
+    axios.post(`${process.env.REACT_APP_API_URL}/schedule/${scheduleId}/detail`,{
       schedulesDateList:dateList
     },{
       headers: {
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiMSIsInN1YiI6IjEiLCJqdGkiOiIxIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTcyNDgzNzY0MCwiZXhwIjoxNzI0OTI0MDQwfQ.L0e1FsrZX-q3WhXcMXUB4mxUPOYVLhHqRPUL2rbJNgQ`
+        Authorization: `Bearer ${token}`
     }
     })
     .then(res=>{
-      handleSetType('');
       navigate('/mypage');
     }).catch(err=>{
       console.log(err);
@@ -35,15 +34,14 @@ const AddScheduleTitle = (props) => {
   }
 
   const put = () =>{
-    axios.put(`http://localhost:8081/schedule/${scheduleId}/detail`,{
+    axios.put(`${process.env.REACT_APP_API_URL}/schedule/${scheduleId}/detail`,{
       schedulesDateList:dateList
     },{
       headers: {
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiMSIsInN1YiI6IjEiLCJqdGkiOiIxIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTcyNDgzNzY0MCwiZXhwIjoxNzI0OTI0MDQwfQ.L0e1FsrZX-q3WhXcMXUB4mxUPOYVLhHqRPUL2rbJNgQ`
+        Authorization: `Bearer ${token}`
       }
     })
     .then(res=>{
-      handleSetType('');
       navigate('/mypage');
     }).catch(err=>{
       console.log(err);
