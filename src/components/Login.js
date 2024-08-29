@@ -9,7 +9,6 @@ const Login = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [shake, setShake] = useState(false); // 애니메이션을 위한 상태
   const API_URL = process.env.REACT_APP_API_URL;
-  console.log(API_URL);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -44,14 +43,6 @@ const Login = () => {
       setErrorMessage('서버와의 연결에 문제가 발생했습니다.');
       setShake(true); // 로그인 실패 시 애니메이션 시작
     }
-
-    // 서버 연결 없이, 로그인 성공으로 간주하고 메인 페이지로 이동
-    // if (username && password) {
-    //   navigate('/');
-    // } else {
-    //   setErrorMessage('정확한 아이디와 비밀번호를 입력해주세요.');
-    //   setShake(true); // 로그인 실패 시 애니메이션 시작
-    // }
   };
 
   const handleKeyDown = (e) => {
