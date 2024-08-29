@@ -5,8 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 const AddScheduleTitle = (props) => {
   const navigate = useNavigate();
-  const {detailScheduleInfo,dateList,view,scheduleId,type,handleSetType} = useContext(MapYourTripContext);
-
+  const {detailScheduleInfo,dateList,view,scheduleId,type} = useContext(MapYourTripContext);
+  const token = sessionStorage.getItem('token'); 
   const click = () =>{
     if(!view){
       if(type === 'create'){
@@ -23,11 +23,10 @@ const AddScheduleTitle = (props) => {
       schedulesDateList:dateList
     },{
       headers: {
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoibWluIiwic3ViIjoibWluIiwianRpIjoiNSIsInJvbGUiOiJST0xFX1VTRVIiLCJpYXQiOjE3MjQ4OTI0NTAsImV4cCI6MTcyNDk3ODg1MH0.z9hFJe1Y6q7SlWgV-lKUFHKxheiDwxv-klYyB887DjM`
+        Authorization: `Bearer ${token}`
     }
     })
     .then(res=>{
-      handleSetType('');
       navigate('/mypage');
     }).catch(err=>{
       console.log(err);
@@ -39,11 +38,10 @@ const AddScheduleTitle = (props) => {
       schedulesDateList:dateList
     },{
       headers: {
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoibWluIiwic3ViIjoibWluIiwianRpIjoiNSIsInJvbGUiOiJST0xFX1VTRVIiLCJpYXQiOjE3MjQ4OTI0NTAsImV4cCI6MTcyNDk3ODg1MH0.z9hFJe1Y6q7SlWgV-lKUFHKxheiDwxv-klYyB887DjM`
+        Authorization: `Bearer ${token}`
       }
     })
     .then(res=>{
-      handleSetType('');
       navigate('/mypage');
     }).catch(err=>{
       console.log(err);

@@ -5,8 +5,8 @@ import defaultProfileImage from '../assets/icon_person.svg';
 import '../styles/MyPage.css';
 import MapYourTripContext from '../provider/MapYourTripContext';
 import axios from 'axios';
+import TravelPlansList from './TravelPlansList'
 const MyPage = () => {
-  const {handleSetType} = useContext(MapYourTripContext);
   const [profile, setProfile] = useState(null);
   const [travelPlans, setTravelPlans] = useState([]);
   const [isEditingNickname, setIsEditingNickname] = useState(false);
@@ -78,7 +78,7 @@ const MyPage = () => {
   const handleDeletePlan = (index,scheduleId) => {
     axios.delete(`${process.env.REACT_APP_API_URL}/schedule/${scheduleId}`,{
       headers:{
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoibWluIiwic3ViIjoibWluIiwianRpIjoiNSIsInJvbGUiOiJST0xFX1VTRVIiLCJpYXQiOjE3MjQ4OTI0NTAsImV4cCI6MTcyNDk3ODg1MH0.z9hFJe1Y6q7SlWgV-lKUFHKxheiDwxv-klYyB887DjM`
+        Authorization: `Bearer ${sessionStorage.getItem('token') }`
       }
     }).then((res)=>{
       setTravelPlans((prevPlans) => prevPlans.filter((_, i) => i !== index));
@@ -140,12 +140,12 @@ const MyPage = () => {
       )}
 
       {/* 여행 계획 리스트 */}
-      {/* 
+      
       <TravelPlansList
         travelPlans={travelPlans}
         onDeletePlan={handleDeletePlan}
       />
-      */}
+     
     </div>
   );
 };

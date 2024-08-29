@@ -1,8 +1,10 @@
 import React from 'react';
 import editIcon from '../assets/icon_edit.svg';
 import '../styles/TravelPlansList.css';
+import { useNavigate } from 'react-router-dom';
 
 const TravelPlansList = ({ travelPlans, onDeletePlan }) => {
+  const navigate = useNavigate();
   return (
     <div className="travel-plans-section">
       <h3>My Travel Plans</h3>
@@ -11,7 +13,7 @@ const TravelPlansList = ({ travelPlans, onDeletePlan }) => {
           <div key={index} className="travel-plan-card">
             <div className="travel-plan-header">
               <h4>{plan.tripName}</h4>
-              <img src={editIcon} className="edit-plan-icon" />
+              <img src={editIcon} className="edit-plan-icon" onClick={()=>{navigate(`/schedule/modify/${plan.id}`)}}/>
             </div>
             <p>{plan.startDate} ~ {plan.endDate}</p>
             <button
