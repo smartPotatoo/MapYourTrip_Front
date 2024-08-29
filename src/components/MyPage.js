@@ -25,7 +25,7 @@ const MyPage = () => {
         });
     
         const data = await response.json();
-    
+        
         if (!response.ok) {
           console.error('응답 상태 코드:', response.status);
           console.error('응답 메시지:', data);
@@ -37,6 +37,7 @@ const MyPage = () => {
             nickname: data.body.nickname,
             filePath: data.body.userpicture ? data.body.userpicture.filePath : null,
           });
+          setNewNickname(data.body.nickname);
           setTravelPlans(data.body.scheduleInfoResponse);
         } else {
           console.error('마이페이지 데이터를 가져오는 데 실패했습니다.');
@@ -48,9 +49,44 @@ const MyPage = () => {
     fetchMyPageData();
   }, []);
 
+  const [file,setFile] = useState(null);
+
+
   const handleProfileImageChange = (event) => {
-    const file = event.target.files[0];
-    if (file) {
+    const fileInfo = event.target.files[0];
+    setFile(event.target.files[0])
+    console.log(event.target.files[0])
+
+    const token = sessionStorage.getItem('token');
+      const formData = new FormData();
+  
+      // 닉네임 추가: undefined 체크
+      if (newNickname !== undefined) {
+        formData.append('data', new Blob([JSON.stringify({ nickname: newNickname })],{ type: 'application/json' }));
+      }
+      formData.append('file', fileInfo);
+      // FormData 내용 출력
+      for (let [key, value] of formData.entries()) { 
+        console.log(key, value); // FormData에 들어간 각 키-값 쌍을 출력
+      }
+      axios.patch(
+        `${process.env.REACT_APP_API_URL}/mypage`,
+        formData,
+        {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'multipart/form-data',
+          },
+        }
+      ).then((res)=>{
+        console.log(res)
+      }).catch(err=>{
+        console.log(err)
+      });
+
+
+
+    if (fileInfo) {
       const reader = new FileReader();
       reader.onloadend = () => {
         setProfile((prevProfile) => ({
@@ -58,7 +94,7 @@ const MyPage = () => {
           filePath: reader.result,
         }));
       };
-      reader.readAsDataURL(file);
+      reader.readAsDataURL(fileInfo);
     }
   };
 
@@ -68,27 +104,20 @@ const MyPage = () => {
   };
 
   const handleSaveNickname = async () => {
-    try {
+    console.log("asdf")
       const token = sessionStorage.getItem('token');
       const formData = new FormData();
   
       // 닉네임 추가: undefined 체크
       if (newNickname !== undefined) {
-        formData.append('data', JSON.stringify({ nickname: newNickname }));
+        formData.append('data', new Blob([JSON.stringify({ nickname: newNickname })],{ type: 'application/json' }));
       }
-  
-      // 파일이 존재할 경우 파일 추가
-      const fileInput = document.querySelector('.mypage-edit-profile-input');
-      if (fileInput && fileInput.files[0]) {
-        formData.append('file', fileInput.files[0]);
-      }
-  
+      formData.append('file', file);
       // FormData 내용 출력
       for (let [key, value] of formData.entries()) { 
         console.log(key, value); // FormData에 들어간 각 키-값 쌍을 출력
       }
-  
-      const response = await axios.patch(
+      await axios.patch(
         `${process.env.REACT_APP_API_URL}/mypage`,
         formData,
         {
@@ -97,28 +126,18 @@ const MyPage = () => {
             'Content-Type': 'multipart/form-data',
           },
         }
-      );
-  
-      if (response.status === 200) {
-        setProfile((prevProfile) => ({
-          ...prevProfile,
-          nickname: newNickname,
-        }));
-        setIsEditingNickname(false);
-        console.log('닉네임이 성공적으로 수정되었습니다.');
-      } else {
-        console.error('닉네임 수정에 실패했습니다. 응답 상태 코드:', response.status);
-      }
-    } catch (error) {
-      console.error('서버와의 연결에 문제가 발생했습니다:', error);
-      console.error('에러 상세 정보:', error.response?.data || error.message);
-    }
+      ).then((res)=>{
+        console.log(res)
+      }).catch(err=>{
+        console.log(err)
+      });
   };
 
-  const handleDeletePlan = (index, scheduleId) => {
-    axios.delete(`${process.env.REACT_APP_API_URL}/schedule/${scheduleId}`, {
-      headers: {
-        Authorization: `Bearer ${sessionStorage.getItem('token')}`
+
+  const handleDeletePlan = (index,scheduleId) => {
+    axios.delete(`${process.env.REACT_APP_API_URL}/schedule/${scheduleId}`,{
+      headers:{
+        Authorization: `Bearer ${sessionStorage.getItem('token') }`
       }
     }).then((res) => {
       setTravelPlans((prevPlans) => prevPlans.filter((_, i) => i !== index));
