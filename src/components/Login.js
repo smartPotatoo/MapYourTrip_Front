@@ -53,7 +53,7 @@ const Login = () => {
 
   return (
     <div id="login-root" className="login-page">
-      <h1 className="logo">MainYourTrip</h1>
+      <h1 className="logo">MapYourTrip</h1>
       <form className={`login-container ${shake ? 'shake' : ''}`} onAnimationEnd={() => setShake(false)}>
         <div className="input-group">
           <label htmlFor="username">아이디</label>
