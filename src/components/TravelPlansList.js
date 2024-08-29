@@ -8,7 +8,7 @@ const TravelPlansList = ({ travelPlans, onDeletePlan }) => {
       <h3>My Travel Plans</h3>
       <div className="travel-plans-list">
         {travelPlans.map((plan, index) => (
-          <TravelPlanItem plan={plan} index={index} onDeletePlan={onDeletePlan()}/>
+          <TravelPlanItem plan={plan} index={index} onDeletePlan={onDeletePlan}/>
         ))}
       </div>
     </div>
