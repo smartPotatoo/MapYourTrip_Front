@@ -31,7 +31,6 @@ const AddDetailSchedule = (props) => {
         Authorization: `Bearer ${token}`
       }
     }).then(res=>{
-      console.log(res)
       setAddressInfo({ ...addressInfo,
         name: data.buildingName !== '' ? data.buildingName : data.address, 
         address: data.address,
@@ -62,7 +61,6 @@ const AddDetailSchedule = (props) => {
   }
 
   useEffect(()=>{
-    console.log(addressInfo)
     if(addressInfo.startTime !== ''&& addressInfo.endTime !== ''&& addressInfo.name !== ''&& addressInfo.x !== ''&& addressInfo.y !==''){
       setConfirm(false);
     }else{
