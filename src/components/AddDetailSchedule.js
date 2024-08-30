@@ -26,7 +26,7 @@ const AddDetailSchedule = (props) => {
   }
 
   const handleComplete = (data) =>{
-    axios.get((`http://localhost:8081/search/${data.address}`),{
+    axios.get((`${process.env.REACT_APP_API_URL}/search/${data.address}`),{
       headers:{
         Authorization: `Bearer ${token}`
       }
