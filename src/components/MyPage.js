@@ -12,24 +12,7 @@ const MyPage = () => {
   const [isEditingNickname, setIsEditingNickname] = useState(false);
   const [newNickname, setNewNickname] = useState('');
   const [profilePicture, setProfilePicture] = useState(null);
-
-  const getProfilePicture = () => {
-    const token = sessionStorage.getItem('token');
-    axios({
-      url: `${process.env.REACT_APP_API_URL}/mypage/picture`,
-      method: 'GET',
-      responseType: 'blob',
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
-    })
-      .then(res => {
-        console.log(res);
-        const url = URL.createObjectURL(res.data);
-        setProfilePicture(url);
-      })
-      .catch(err => console.log(err));
-  };
+  const [file, setFile] = useState(null);
 
   useEffect(() => {
     const fetchMyPageData = async () => {
@@ -43,13 +26,14 @@ const MyPage = () => {
           },
         });
 
-        const data = await response.json();
-
         if (!response.ok) {
+          const data = await response.json();
           console.error('응답 상태 코드:', response.status);
           console.error('응답 메시지:', data);
           throw new Error('서버에서 오류가 발생했습니다.');
         }
+
+        const data = await response.json();
 
         if (data.result.resultCode === 200) {
           setProfile({
@@ -65,25 +49,48 @@ const MyPage = () => {
         console.error('서버와의 연결에 문제가 발생했습니다:', error);
       }
     };
+
     fetchMyPageData();
   }, []);
 
   useEffect(() => {
+    let objectUrl;
     if (profile && profile.filename) {
-      getProfilePicture();
-    }
-  }, [profile])
+      const fetchProfilePicture = async () => {
+        try {
+          const token = sessionStorage.getItem('token');
+          const res = await axios({
+            url: `${process.env.REACT_APP_API_URL}/mypage/picture`,
+            method: 'GET',
+            responseType: 'blob',
+            headers: {
+              'Authorization': `Bearer ${token}`,
+            },
+          });
+          objectUrl = URL.createObjectURL(res.data);
+          setProfilePicture(objectUrl);
+        } catch (err) {
+          console.log(err);
+        }
+      };
 
-  const [file, setFile] = useState(null);
+      fetchProfilePicture();
+    }
+
+    return () => {
+      if (objectUrl) {
+        URL.revokeObjectURL(objectUrl);
+      }
+    };
+  }, [profile]);
 
   const handleProfileImageChange = (event) => {
     const fileInfo = event.target.files[0];
-    setFile(event.target.files[0])
+    setFile(fileInfo);
 
     const token = sessionStorage.getItem('token');
     const formData = new FormData();
 
-    // 닉네임 추가: undefined 체크
     if (newNickname !== undefined) {
       formData.append('data', new Blob([JSON.stringify({ nickname: newNickname })], { type: 'application/json' }));
     }
@@ -98,15 +105,21 @@ const MyPage = () => {
           'Content-Type': 'multipart/form-data',
         },
       }
-    ).then((res) => {
-      console.log(res);
+    )
+      .then((res) => {
+        console.log(res);
+        const newProfileUrl = URL.createObjectURL(fileInfo);
+        setProfilePicture(newProfileUrl);
 
-      // 프로필 사진이 성공적으로 업로드되면 새로운 Blob URL 생성
-      const newProfileUrl = URL.createObjectURL(fileInfo);
-      setProfilePicture(newProfileUrl);
-    }).catch(err => {
-      console.log(err)
-    });
+        return () => {
+          if (newProfileUrl) {
+            URL.revokeObjectURL(newProfileUrl);
+          }
+        };
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const handleEditNickname = () => {
@@ -115,19 +128,14 @@ const MyPage = () => {
   };
 
   const handleSaveNickname = async () => {
-    console.log("asdf")
     const token = sessionStorage.getItem('token');
     const formData = new FormData();
 
-    // 닉네임 추가: undefined 체크
     if (newNickname !== undefined) {
       formData.append('data', new Blob([JSON.stringify({ nickname: newNickname })], { type: 'application/json' }));
     }
     formData.append('file', file);
-    // FormData 내용 출력
-    for (let [key, value] of formData.entries()) {
-      console.log(key, value); // FormData에 들어간 각 키-값 쌍을 출력
-    }
+
     await axios.patch(
       `${process.env.REACT_APP_API_URL}/mypage`,
       formData,
@@ -137,24 +145,34 @@ const MyPage = () => {
           'Content-Type': 'multipart/form-data',
         },
       }
-    ).then((res) => {
-      console.log(res)
-    }).catch(err => {
-      console.log(err)
-    });
+    )
+      .then((res) => {
+        console.log(res);
+        setIsEditingNickname(false);
+        if (!file) {
+          setProfile((prevProfile) => ({
+            ...prevProfile,
+            nickname: newNickname,
+          }));
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
-
 
   const handleDeletePlan = (index, scheduleId) => {
     axios.delete(`${process.env.REACT_APP_API_URL}/schedule/${scheduleId}`, {
       headers: {
-        Authorization: `Bearer ${sessionStorage.getItem('token')}`
-      }
-    }).then((res) => {
-      setTravelPlans((prevPlans) => prevPlans.filter((_, i) => i !== index));
-    }).catch(err => {
-      console.log(err);
-    });
+        Authorization: `Bearer ${sessionStorage.getItem('token')}`,
+      },
+    })
+      .then((res) => {
+        setTravelPlans((prevPlans) => prevPlans.filter((_, i) => i !== index));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
@@ -210,12 +228,10 @@ const MyPage = () => {
       )}
 
       {/* 여행 계획 리스트 */}
-
       <TravelPlansList
         travelPlans={travelPlans}
         onDeletePlan={handleDeletePlan}
       />
-
     </div>
   );
 };
