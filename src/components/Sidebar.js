@@ -24,7 +24,7 @@ const Sidebar = () => {
 
   return (
     <div className="sidebar-container">
-      <Link to="/main" style={{ textDecoration: 'none' ,color: 'inherit'}}>
+      <Link to="/main" style={{ textDecoration: 'none', color: 'inherit' }}>
         <h2 className="logo-text">MapYourTrip</h2>
       </Link>
       {!isLoggedIn && !type ? (
@@ -36,19 +36,20 @@ const Sidebar = () => {
         </>
       ) : (
         <>
-          {
-            type ==='create' || type === 'view' || type === 'modify' ? 
-            <DetailScheduleList/>
-            :
+          {(type === 'create' || type === 'view' || type === 'modify') ? (
+            <DetailScheduleList />
+          ) : (
             <div className='login-sidebar-container'>
               <Link to="/main" className="menu-item">Travel Plans</Link>
               <div className="menu-item">Map</div>
             </div>
-          }
-          <div className="profile-logout-container">
-            <Link to="/mypage" className="menu-item small-button">Profile</Link>
-            <div className="menu-item small-button logout-button" onClick={handleLogout}>Sign Out</div>
-          </div>
+          )}
+          {isLoggedIn && (
+            <div className="profile-logout-container">
+              <Link to="/mypage" className="menu-item small-button">Profile</Link>
+              <div className="menu-item small-button logout-button" onClick={handleLogout}>Sign Out</div>
+            </div>
+          )}
         </>
       )}
     </div>
