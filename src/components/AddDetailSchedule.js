@@ -5,6 +5,7 @@ import { useEffect, useState, useContext } from 'react';
 import MapYourTripContext from '../provider/MapYourTripContext';
 import { useDaumPostcodePopup } from "react-daum-postcode";
 const AddDetailSchedule = (props) => {
+  const token = sessionStorage.getItem('token'); 
   const [addressInfo, setAddressInfo] = useState({
     startTime:'',
     endTime:'',
@@ -25,18 +26,17 @@ const AddDetailSchedule = (props) => {
   }
 
   const handleComplete = (data) =>{
-    axios.get((`/map-geocode/v2/geocode?query=${data.address}`),{
+    axios.get((`http://localhost:8081/search/${data.address}`),{
       headers:{
-        "X-NCP-APIGW-API-KEY-ID":process.env.REACT_APP_NAVER_MAP_CLIENT_ID,
-        "X-NCP-APIGW-API-KEY":process.env.REACT_APP_NAVER_MAP_API_KEY
+        Authorization: `Bearer ${token}`
       }
     }).then(res=>{
       console.log(res)
       setAddressInfo({ ...addressInfo,
         name: data.buildingName !== '' ? data.buildingName : data.address, 
         address: data.address,
-        x: res.data.addresses[0].x,
-        y: res.data.addresses[0].y
+        x: res.data.body.y,
+        y: res.data.body.x
       })
     }).catch(err=>{
       console.log(err);
@@ -62,6 +62,7 @@ const AddDetailSchedule = (props) => {
   }
 
   useEffect(()=>{
+    console.log(addressInfo)
     if(addressInfo.startTime !== ''&& addressInfo.endTime !== ''&& addressInfo.name !== ''&& addressInfo.x !== ''&& addressInfo.y !==''){
       setConfirm(false);
     }else{
