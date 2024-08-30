@@ -31,6 +31,7 @@ const AddDetailSchedule = (props) => {
         "X-NCP-APIGW-API-KEY":process.env.REACT_APP_NAVER_MAP_API_KEY
       }
     }).then(res=>{
+      console.log(res)
       setAddressInfo({ ...addressInfo,
         name: data.buildingName !== '' ? data.buildingName : data.address, 
         address: data.address,
