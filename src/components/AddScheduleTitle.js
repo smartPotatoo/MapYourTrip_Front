@@ -28,7 +28,7 @@ const AddScheduleTitle = (props) => {
     })
     .then(res=>{
       handleSetScheduleTimeInfo([])
-      navigate('/mypage');
+      navigate('/');
     }).catch(err=>{
       console.log(err);
     })
@@ -44,7 +44,7 @@ const AddScheduleTitle = (props) => {
     })
     .then(res=>{
       handleSetScheduleTimeInfo([])
-      navigate('/mypage');
+      navigate('/');
     }).catch(err=>{
       console.log(err);
     })
